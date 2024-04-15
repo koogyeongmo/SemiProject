@@ -1,0 +1,148 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    min-height: 1000px;
+}
+.login_container {
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 50px;
+    padding-bottom: 30px;
+    width: 400px;
+    text-align: center;
+    position: relative;
+    z-index: 100;
+}
+.login_container h1 {
+    margin-bottom: 40px;
+    font-size: 28px;
+}
+.login_container input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 16px;
+    margin-bottom: 40px;
+    border: None;
+    border-radius: 27px;
+    box-sizing: border-box;
+    font-size: 20px;
+    position: relative;
+    background-color: #EAEDEF;
+}
+
+.login_container input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 16px;
+    margin-bottom: 10px;
+    border: None;
+    border-radius: 27px;
+    box-sizing: border-box;
+    font-size: 20px;
+    position: relative;
+    background-color: #EAEDEF;
+}
+
+.login_container input[type="password"] {
+    padding-right: 60px;
+}
+.login_container .show_password {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 45%;
+    right: 20px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #262626;
+}
+.login_button {
+    background-color: #FF5700;
+    color: #fff;
+    padding: 15px 0;
+    border: none;
+    border-radius: 27px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 20px;
+}
+.login_button:hover {
+    background-color: #c94300;
+}
+.create_account {
+    margin-top: 30px;
+}
+
+.password_container {
+    position: relative;
+    height: 64px;
+}
+
+.forgot {
+    margin-top: 10px;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.forgot > a {
+    text-decoration: none;
+    color: blue;
+}
+
+.forgot > a:hover {
+    text-decoration: underline;
+}
+
+.create_account > a {
+    text-decoration: none;
+    color: blue;
+
+}
+
+.create_account > a:hover {
+    text-decoration: underline;
+}
+
+.login_footer {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.login_footer > ul > li {
+    float: left;
+    margin-left: 15px;
+
+}
+
+.login_footer > ul > li > a{
+    text-decoration: none;
+    color: black;
+}
+
+.login_footer > ul > li > a:hover{
+    text-decoration: underline;
+}
+
+#logo_icon {
+    width: 174px;
+}
+
+.login_header {
+    position: fixed;
+    top: 20px;
+    width: 100%;
+    display: flex;
+    margin-left: 70px;
+}
+
+  
