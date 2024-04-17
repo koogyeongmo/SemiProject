@@ -1,30 +1,104 @@
+:root {
+    --main-color: #fd5d44;
+    /*#fd5d44 #FF5700*/
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     min-height: 1000px;
 }
-.login_container {
+.wrapper {
     background-color: #fff;
     border-radius: 30px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 50px;
-    padding-bottom: 30px;
+    padding-top: 20px;
     width: 400px;
+    height: 480px;
     text-align: center;
     position: relative;
+    overflow: hidden;
     z-index: 100;
+    transition: all 0.15s;
+
+
 }
-.login_container h1 {
-    margin-bottom: 40px;
-    font-size: 28px;
+.title-text{
+    display: flex;
+    width: 200%;
+  }
+
+.wrapper .title{
+width: 50%;
+font-size: 35px;
+font-weight: 600;
+text-align: center;
+transition: all 0.5s cubic-bezier(0.68,-0.55,0.265,1.55);
 }
-.login_container input[type="text"] {
+
+.slide-controls{
+    position: relative;
+    display: flex;
+    height: 50px;
+    width: 90%;
+    margin: auto;
+    margin-top: 20px;
+    justify-content: space-between;
+    border: 1px solid lightgrey;
+    border-radius: 25px;
+
+
+}
+
+.slide-controls .slide{
+    height: 100%;
+    width: 100%;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 520;
+    text-align: center;
+    line-height: 48px;
+    cursor: pointer;
+    z-index: 1;
+    transition: all 0.2s ease;
+  }
+
+.slide-controls label.signup{
+    color: #000;
+}
+
+.slider-tab{
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    z-index: 0;
+    border-radius: 25px;
+    background: var(--main-color);
+}
+
+.form-container{
+    overflow: hidden;
+}
+
+.form-inner{
+    display: flex;
+    width: 800px;
+}
+
+
+.form-container .form-inner form{
+    box-sizing: border-box;
+    width: 50%;
+    padding: 30px;
+    transition: all 0.5s cubic-bezier(0.68,-0.55,0.265,1.55);
+}
+
+.wrapper input[type="text"] {
     width: calc(100% - 20px);
     padding: 16px;
     margin-bottom: 40px;
@@ -36,7 +110,7 @@ body {
     background-color: #EAEDEF;
 }
 
-.login_container input[type="password"] {
+.wrapper input[type="password"] {
     width: calc(100% - 20px);
     padding: 16px;
     margin-bottom: 10px;
@@ -48,10 +122,10 @@ body {
     background-color: #EAEDEF;
 }
 
-.login_container input[type="password"] {
+.wrapper input[type="password"] {
     padding-right: 60px;
 }
-.login_container .show_password {
+.show_password {
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -62,8 +136,8 @@ body {
     font-size: 18px;
     color: #262626;
 }
-.login_button {
-    background-color: #FF5700;
+.login_button, .signup_button {
+    background-color: var(--main-color);
     color: #fff;
     padding: 15px 0;
     border: none;
@@ -72,8 +146,8 @@ body {
     cursor: pointer;
     font-size: 20px;
 }
-.login_button:hover {
-    background-color: #c94300;
+.login_button:hover, .signup_button:hover {
+    background-color: var(--main-color);
 }
 .create_account {
     margin-top: 30px;
@@ -103,6 +177,15 @@ body {
     text-decoration: none;
     color: blue;
 
+}
+
+.blue_link {
+    text-decoration: none;
+    color: blue;
+}
+
+.blue_link:hover {
+    text-decoration: underline;
 }
 
 .create_account > a:hover {
@@ -145,4 +228,99 @@ body {
     margin-left: 70px;
 }
 
-  
+input[type="radio"]{
+    display: none;
+}
+
+#signup:checked ~ .slider-tab{
+left: 50%;
+}
+#signup:checked ~ label.signup{
+color: #fff;
+cursor: default;
+user-select: none;
+}
+#signup:checked ~ label.login{
+color: #000;
+}
+#login:checked ~ label.signup{
+color: #000;
+}
+#login:checked ~ label.login{
+cursor: default;
+user-select: none;
+}
+
+.tac_container {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-size: 16px;
+
+}
+
+#tac_checkbox {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+.dialogue_box {
+    position: absolute;
+    display: block;
+    padding: 1em 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5em;
+    background-color: #fff;
+    text-align: center;
+    margin-left: 220px;
+    z-index: 200;
+
+    }
+
+.dialogue_box::before {
+    position: absolute; 
+    width: 1em;
+    height: 1em;
+    left: calc( -0.7em + 2px );
+    transform: rotate( -135deg );
+    background-color: #fff;
+    content: '';
+    z-index:199;
+    
+}
+
+.error_messages {
+    position: absolute;
+    display: none;
+    /*temporary */
+}
+
+.email_exists {
+    margin-top: -136px;
+    width: 18em;
+
+}
+
+.username_exists {
+    margin-top: -70px;
+    width: 16em;
+
+}
+
+.invalid_password {
+    margin-top: 25px;
+    width: 17em;
+
+
+}   
+
+.password_mismatch {
+    margin-top: 90px;
+    width: 14em;
+}
+
+.check_tac {
+    margin-top: 153px;
+    width: 20em;
+}
+
