@@ -50,10 +50,10 @@
 
                     <input type="text" name="email" style="margin-bottom:10px" placeholder="Email" required>
         
-                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="text" name="id" placeholder="Username" required>
         
                     <div class="password_container">
-                        <input type="password" name="pwd1" class="password2" placeholder="Password" required>
+                        <input type="password" name="pwd" class="password2" placeholder="Password" required>
                         <button type="button" class="show_password" id="password2" onclick="togglePassword2()">Show</button>
                     </div>
         
@@ -173,10 +173,12 @@
 		
 	    $(loadedHandler);
 	    function loadedHandler(){
-	    	$(".login_button").on("click", frmClickHandler);
+	    	$(".login_button").on("click", loginClickHandler);
+	    	$(".signup_button").on("click", signupClickHandler); 
+
 	    }
 
-	    function frmClickHandler(){
+	    function loginClickHandler(){
 	    	$.ajax({
 	    		url:"${pageContext.request.contextPath }/login"
 	    		, method : "post"
@@ -184,14 +186,14 @@
 	    		, success : function(result){
 	    			console.log(result);
 	    			if(result == 1 ){
-	    				alert("반갑습니다.");
+	    				alert("Welcome!");
 	    				var prePage = "${prePage}";
 	    				if(prePage == "write"){
 	    					location.href="${pageContext.request.contextPath}/board/write";
 	    				}
 	    				location.href="${pageContext.request.contextPath}/main";
 	    			}else {
-	    				alert("아이디 또는 패스워드가 일치하지 않습니다.\n다시 확인하고 로그인해주세요.");
+	    				alert("Username or password is incorrect.");
 	    				$("[name=pwd]").val("");
 	    			}
 	    		}
@@ -201,9 +203,62 @@
 	    					+ "error: "+error);
 	    		}
 	    	});
-	    	
 	    }
-	    	
+	    
+	    function signupClickHandler(){
+	    	$.ajax({
+	    		url:"${pageContext.request.contextPath }/join"
+	    		, method : "post"
+	    		, data : $("#signup_form").serialize()
+	    		, success : function(result){
+	    			console.log(result);
+	    			if(result == 1 ){
+	    				alert("Thanks for joining!");
+	    				var prePage = "${prePage}";
+	    				console.log(prePage);
+	    				console.log("test");
+
+	    				if(prePage == "write"){
+	    					location.href="${pageContext.request.contextPath}/board/write";
+	    				}
+	    				location.href="${pageContext.request.contextPath}/login";
+	    			}else {
+	    				alert("fail");
+	    				$("[name=pwd]").val("");
+	    			}
+	    		}
+	    		,error : function(request, status, error){
+	    			alert("code: "+request.status + "\n" + "message: " 
+	    					+ request.responseText + "\n"
+	    					+ "error: "+error);
+	    		}
+	    	});
+	    }
+	    
+	    function btnCheckidClickHandler(){
+	    	var idVal = $("[name=id]").val();
+	    	$.ajax( { 
+	    		async : false, 
+	    		url : "${pageContext.request.contextPath }/checkid.ajax"
+	    		,method : "post"
+	    		,data : { cid : $("[name=id]").val(), k1:"v1", k2:"v2" }
+	    		,success : function(result){ 
+	    			console.log(result);
+	    			if(result > 0){
+	    				alert("사용불가!! 다른아이디를 사용해주세요.");
+	    			}else {
+	    				alert("사용가능");
+	    			}	
+	    		}
+	    		,error : function(request, status, error){
+	    			alert("code: "+request.status + "\n" + "message: " 
+	    					+ request.responseText + "\n"
+	    					+ "error: "+error);
+	    		}
+	    	} );
+
+	    }
+
 	    	
 	    
     	
