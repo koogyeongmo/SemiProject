@@ -1,7 +1,9 @@
 <link href="<%=request.getContextPath()%>/resources/css/header/header.css" rel="stylesheet">
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <body>
     <header id="header" class="sticky">
         <div class="header_box">
@@ -35,11 +37,25 @@
                         <span class="online"></span>
                     </button>
                     <div class="profile_dropdown_content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
+                    	<div>
+                    		<a href="">Link 1</a>
+                    	</div>
+                    	<div>
+                    		<a href="">Link 2</a>
+                    	</div>
+                    	<div>
+                    		<a href="">Link 3</a>
+                    	</div>
+                        <div>
+                            <form id="frm-logout">
+								<button class="btn logout">Sign Out</button>
+							</form>
+                        </div>
+
+				                        
                     </div>
                 </div>
+            </div>
 
 
         
@@ -75,6 +91,39 @@
                 profileDropdownContent.classList.remove('profile_active');
             }
         });
+        
+    	$(".btn.logout").on("click", btnLogoutClickHandler);
+		
+    	function btnLogoutClickHandler(){
+
+    		
+    		alert("Signed out.");
+    		
+    		var frmlogout = document.getElementById("frm-logout");
+    		frmlogout.action = "${pageContext.request.contextPath}/signout";
+    		frmlogout.method = "post";
+    		frmlogout.submit();
+    		
+    		
+    	}
+    	
+        function checkLoginStatus() {
+            var isLoggedOut = ${empty LoggedIn};
+
+            if (isLoggedOut) {
+                $(".profile_container").hide();
+                console.log("loggedIn");
+            } else {
+                $(".profile_container").show();
+                console.log("loggedOut");
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            checkLoginStatus();
+        });
+    	        
+        
     </script>
     
 </body>

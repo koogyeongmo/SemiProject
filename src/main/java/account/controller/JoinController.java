@@ -1,4 +1,4 @@
-package login.controller;
+package account.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -35,8 +35,7 @@ public class JoinController extends HttpServlet {
 		MemberDto dto = new MemberDto(memId, memPwd, memEmail);
 		int result = new MemberService().insert(dto);
 		if(result < 0 ) {
-			// 회원가입실패시
-			// TODO
+
 			response.sendRedirect(request.getContextPath()+"/main");
 			return;
 		}

@@ -1,4 +1,4 @@
-package login.controller;
+package account.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -36,7 +36,7 @@ public class LoginController extends HttpServlet {
 		MemberInfoDto resultInfo = service.loginGetInfo(dto);
 		
 		if(resultInfo != null) {
-			request.getSession().setAttribute("sssLogin", resultInfo);
+			request.getSession().setAttribute("LoggedIn", resultInfo);
 			result = 1;
 		}
 		response.getWriter().append(String.valueOf(result));

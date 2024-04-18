@@ -128,7 +128,7 @@ header.sticky{
   display: block;
 }
 
-.profile_dropdown_content a {
+.profile_dropdown_content div {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
