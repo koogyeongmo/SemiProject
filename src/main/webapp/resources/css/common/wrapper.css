@@ -1,0 +1,7 @@
+ .page_wrapper {
+    margin-left: 200px;
+    display: flex;
+    position: relative;
+    align-items: flex-start;
+}
+  
