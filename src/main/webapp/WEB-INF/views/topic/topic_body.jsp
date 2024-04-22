@@ -104,4 +104,7 @@
 
 </div>
 
+<script src="<%=request.getContextPath()%>/resources/javascript/topic.js"> </script>
+
+
     

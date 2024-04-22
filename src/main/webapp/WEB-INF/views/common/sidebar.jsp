@@ -57,3 +57,5 @@
   </div>
 
 </div>
+
+<script src="<%=request.getContextPath()%>/resources/javascript/sidebar.js"> </script>
