@@ -1,0 +1,137 @@
+#logo_icon {
+    width: 150px;
+}
+
+.sidebar {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+    padding-top: 10px;
+    box-shadow: 1px 1px 3px rgba(130, 121, 121, 0.1);
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+  }
+
+  .sidebar_logo {
+    padding-left: 20px;
+    padding-bottom: 10px;
+}
+
+.sidebar_selected {
+    background-color: #ecfafe;
+  }
+
+.horizontal_line {
+    border-top: #0000001a solid 1px;
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    color: var(--lightgray);
+    font-size: 14px;
+
+}
+
+.horizontal_line_bottom {
+    border-top: #0000001a solid 1px;
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    color: var(--lightgray);
+    height: 70px;
+    margin-top: auto;
+}
+
+.profile_button {
+    height: 64px;
+    width: 190px;
+    color: var(--gray);
+    display: block;
+    margin: auto;
+    margin-bottom: 5px;
+    display: flex;
+    padding-left: 5px;
+    align-items: center;
+    border-radius: 15px;
+    position: fixed;
+    border: none;
+    bottom: 5px;
+    left: 5px;
+    background-color: white;
+    z-index: 10;
+  
+  }
+
+  .profile_picture_container {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 5px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .profile_button:hover {
+    background-color: var(--background-color);
+  }
+
+  .profile_button span {
+    font-size: 16px;
+    padding-left: 10px;
+  }
+
+
+  
+  .online {
+    position: fixed;
+    bottom: 20px;
+    width: 10px;
+    height: 10px;
+    background-color: limegreen;
+    border-radius: 50%;
+    margin-left: 30px;
+  }
+
+  .profile_dropdown_content {
+    display: none;
+    position: fixed;
+    width: 190px;
+    height:150px;
+    margin-top: 15px;
+    border-radius: 15px;
+    bottom: 70px;
+    margin: 5px;
+    background-color: var(--background-color);
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+
+
+  }
+  
+  .profile_active {
+    display: block;
+  }
+  
+  #profile_picture {
+    width: 40px;
+    height: 40px;
+
+  }
+
+  .mini_topic_icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}

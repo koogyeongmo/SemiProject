@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import user.model.dto.MemberInfoDto;
-import user.model.dto.MemberLoginDto;
-import user.model.service.MemberService;
+import member.model.dto.MemberInfoDto;
+import member.model.dto.MemberLoginDto;
+import member.model.service.MemberService;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {

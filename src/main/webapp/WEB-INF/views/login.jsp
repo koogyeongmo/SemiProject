@@ -10,6 +10,11 @@
     <title>Login Page</title>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     
+    <style>
+	    body {
+	    	background-image: url("<%=request.getContextPath()%>/resources/images/background.jpg");
+	    }
+    </style>
 
 </head>
 <body>

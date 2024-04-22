@@ -12,7 +12,7 @@
 </head>
 <body>
 	<header>
-		<%@include file="/WEB-INF/views/common/header.jsp" %>
+		<%@include file="/WEB-INF/views/topic/topic_body.jsp" %>
 	</header>
 
 </body>

@@ -5,7 +5,8 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f4f4f4;
+    background-size: cover; 
+    background-repeat: no-repeat;
     margin: 0;
     padding: 0;
     display: flex;
@@ -16,7 +17,7 @@ body {
 .wrapper {
     background-color: #fff;
     border-radius: 30px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
     padding-top: 20px;
     width: 400px;
     height: 480px;
@@ -218,6 +219,9 @@ transition: all 0.5s cubic-bezier(0.68,-0.55,0.265,1.55);
 
 #logo_icon {
     width: 174px;
+    filter:drop-shadow(0.5px 0.5px 2px); 
+    
+    
 }
 
 .login_header {
