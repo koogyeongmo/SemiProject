@@ -6,6 +6,8 @@
 		<result column="BOARD_FILE_ID" property="boardFileId"/>
 		<result column="SAVED_FILE_PATH_NAME" property="savedFilePathName"/>
 		<result column="ORIGINAL_FILENAME" property="orginalFileName"/>
+		<result column="CONTENT" property="content"/>
+		
 	</resultMap>
 
 	<select id="selectFileList" parameterType="int" resultMap="FileReadDtoResultMap">
@@ -33,6 +35,13 @@
 		select BOARD_ID, SUBJECT,to_char(WRITE_TIME,'yyyy-mm-dd hh24:mi'),BOARD_WRITER,READ_COUNT 
 			from (select t1.*, rownum rn  
 				from (SELECT BOARD_ID, SUBJECT, WRITE_TIME, BOARD_WRITER, READ_COUNT    FROM BOARD order by board_id desc) t1 )
+		where rn between #{startRownum} and #{endRownum}
+	</select>
+	
+	<select id="selectPageListDetail" resultType="BoardDto" parameterType="map">
+		select BOARD_ID, SUBJECT,to_char(WRITE_TIME,'yyyy-mm-dd hh24:mi'),BOARD_WRITER,READ_COUNT, CONTENT
+			from (select t1.*, rownum rn  
+				from (SELECT BOARD_ID, SUBJECT, WRITE_TIME, BOARD_WRITER, READ_COUNT, CONTENT    FROM BOARD order by board_id desc) t1 )
 		where rn between #{startRownum} and #{endRownum}
 	</select>
 	

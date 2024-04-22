@@ -12,7 +12,6 @@
 </head>
 <body>
 	<header>
-		<%@include file="/WEB-INF/views/topic/topic_body.jsp" %>
 	</header>
 
 </body>

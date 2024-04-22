@@ -9,6 +9,8 @@
 	</settings>
 
 	<typeAliases>
+		<!-- package 내 클래스명이 별칭으로 상용됨 -->
+		<package name="board.model.dto"/>
 		<package name="member.model.dto"/>
 	</typeAliases>
 
@@ -22,25 +24,14 @@
 				<property name="password" value="${jdbc.password}" />
 			</dataSource>
 		</environment>
-		
 	</environments>
 
 	<mappers>
+		<mapper resource="mappers/board-mapper.xml"/>
 		<mapper resource="mappers/member-mapper.xml"/>
+		<!-- xxx-mapper.xml 생성 후 추가 -->
 	</mappers>
 </configuration>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

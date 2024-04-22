@@ -1,4 +1,6 @@
 <link href="<%=request.getContextPath()%>/resources/css/topic/topic_body.css" rel="stylesheet">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <div class="middle_column">
     
@@ -32,12 +34,31 @@
 
     <div id="New" class="content active">
     <!-- <button class="add-post-btn" onclick="addPost('New')">Add Post</button> -->
+    
+   <!-- <div class="post"><span>New Post Title</span><p>New post content goes here...</p></div>
         <div class="post"><span>New Post Title</span><p>New post content goes here...</p></div>
         <div class="post"><span>New Post Title</span><p>New post content goes here...</p></div>
         <div class="post"><span>New Post Title</span><p>New post content goes here...</p></div>
         <div class="post"><span>New Post Title</span><p>New post content goes here...</p></div>
-        <div class="post"><span>New Post Title</span><p>New post content goes here...</p></div>
-        <div class="post"><span>New Post Title</span><p>New post content goes here...</p></div>
+        <div class="post"><span>New Post Title</span><p>New post content goes here...</p></div> -->
+        
+        <c:choose>
+			<c:when test="${empty map.dtolist }">
+
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${map.dtolist }" var="vo" varStatus="vs">
+					<div class="post">
+						<span>${vo.subject }</span>
+						<div>${vo.content }</div>
+						<div>${vo.writeTime }</div>
+						<div>${vo.boardWriter }</div>
+						<div>${vo.readCount }</div>
+					</div>
+					
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
 
     </div>
 
