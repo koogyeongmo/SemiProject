@@ -48,12 +48,13 @@
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${map.dtolist }" var="vo" varStatus="vs">
-					<div class="post">
-						<span>${vo.subject }</span>
-						<div>${vo.content }</div>
-						<div>${vo.writeTime }</div>
-						<div>${vo.boardWriter }</div>
-						<div>${vo.readCount }</div>
+				
+					<div class="post"  onclick="window.location.href='${pageContext.request.contextPath }/thread?id=${vo.boardId }'" >
+							<div>${vo.subject }</div>
+					        <div>${vo.content }</div>
+					        <div>${vo.writeTime }</div>
+					        <div>${vo.boardWriter }</div>
+					        <div>${vo.readCount }</div>
 					</div>
 					
 				</c:forEach>
@@ -125,7 +126,11 @@
 
 </div>
 
-<script src="<%=request.getContextPath()%>/resources/javascript/topic.js"> </script>
+<script src="<%=request.getContextPath()%>/resources/javascript/topic.js"> 
+
+	
+
+</script>
 
 
     
