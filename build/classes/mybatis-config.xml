@@ -12,6 +12,8 @@
 		<!-- package 내 클래스명이 별칭으로 상용됨 -->
 		<package name="board.model.dto"/>
 		<package name="member.model.dto"/>
+		<package name="image.model.dto"/>
+		
 	</typeAliases>
 
 	<environments default="localhost">
@@ -29,7 +31,8 @@
 	<mappers>
 		<mapper resource="mappers/board-mapper.xml"/>
 		<mapper resource="mappers/member-mapper.xml"/>
-		<!-- xxx-mapper.xml 생성 후 추가 -->
+		<mapper resource="mappers/image-mapper.xml"/>
+		
 	</mappers>
 </configuration>
 

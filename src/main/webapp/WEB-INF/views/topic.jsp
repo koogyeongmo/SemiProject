@@ -18,7 +18,28 @@
 	
 		<div class="page_wrapper">
 			<%@include file="/WEB-INF/views/topic/topic_body.jsp" %>
-		</div>
+			<%@include file="/WEB-INF/views/topic/editor.jsp" %>
 			
+			<%@include file="/WEB-INF/views/topic/topic_info.jsp" %>
+			
+		</div>
+		
+		<script>
+			function toggleMainPage() {
+				editorWindow = document.getElementsByClassName("editor_container")[0];
+	            threadWindow = document.getElementsByClassName("middle_column")[0];
+
+	            if (threadWindow.style.display !== 'none') {
+	            	threadWindow.style.display = 'none';
+	            	editorWindow.style.display = 'block';
+	              } else {
+	            	  threadWindow.style.display = 'none';
+	            	  editorWindow.style.display = 'block';
+
+	              }
+			}
+
+		</script>
+		
 	</body>
 </html>
