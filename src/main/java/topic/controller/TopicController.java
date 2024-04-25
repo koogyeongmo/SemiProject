@@ -45,7 +45,7 @@ public class TopicController extends HttpServlet {
             if (parts.length == 2 && checkTopicExists > 0) {
         		String pageNum = request.getParameter("page");
 
-        		int pageSize = 3;
+        		int pageSize = 5;
         		int currentPageNum = 1;  
                 
         		if(pageNum!= null && !pageNum.equals("")) {

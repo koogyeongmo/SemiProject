@@ -214,7 +214,10 @@ function handleFiles(files) {
     }
 }
 	
-    
+	document.getElementsByClassName('post_button')[0].addEventListener('click', function() {
+	    var htmlContent = quill.root.innerHTML; 
+	    console.log(htmlContent);
+	});
     
 
     </script>

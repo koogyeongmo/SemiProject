@@ -74,7 +74,27 @@
 
 
 
-<script src="<%=request.getContextPath()%>/resources/javascript/topic/topic_body.js"> 
+<script src="<%=request.getContextPath()%>/resources/javascript/topic/topic_body.js">
+/* 	$(document).ready(function() {
+		  var loadMoreCounter = 0;
+	
+		  $('#loadMoreBtn').click(function() {
+			  loadMoreCounter++;
+	
+		    $.ajax({
+		      url: '/boardloadmore',
+		      method: 'POST', 
+		      data: { loadMoreCounter: loadMoreCounter },
+		      success: function(response) {
+		    	  $("#thread_content").load(location.href + " #thread_content");
+		      },
+		      error: function(xhr, status, error) {
+		        console.error('Error:', error);
+		      }
+		    });
+		  });
+		}); */
+
 
 </script>
 
