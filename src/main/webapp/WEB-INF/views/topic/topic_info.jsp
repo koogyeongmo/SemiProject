@@ -5,25 +5,24 @@
     <div class="topic_info">
         <div class="topic_info_name">
             <div>
-                topic<b>/cats</b>
+                topic<b>/${topic_id}</b>
             </div>
             <button class="option_button">
                 <img src="<%=request.getContextPath()%>/resources/images/three_dots.png" id="three_dots_icon">
             </button>
         </div>
         <div class="topic_info_description">
-            Pictures, videos, questions and articles featuring/about cats. 
-            Join us to share your love for cats and connect with fellow cat lovers!
+            ${topic_description}
         </div>
 
 
-        <div class="topic_info_follow">
-            <div class="following_count"><b>12,589</b> Followers</div>
+         <div class="topic_info_follow">
+            <div class="following_count"><b class="format_number">${topic_follower}</b> Followers</div>
 
             <button class="join_button"> Join </button>
 
 
-        </div>
+        </div> 
     </div>
 
     <div class="sort_by_flair">
@@ -53,7 +52,6 @@
     </div>
     
     <script src="<%=request.getContextPath()%>/resources/javascript/topic/topic_info.js"> 
-</script>
+	</script>
 
 </div>
-

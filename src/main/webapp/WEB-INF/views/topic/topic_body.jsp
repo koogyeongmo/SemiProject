@@ -12,7 +12,7 @@
                 <img src="<%=request.getContextPath()%>/resources/images/cat_icon.jpg" id="banner">    
 
             </div>
-            <div class="topic_nav_name">cats</div>
+            <div class="topic_nav_name">${topic_id} </div>
         </div>
 
         <div class="tab">
@@ -29,24 +29,15 @@
     </div>
 
 
-
-
-    <div id="New" class="content active">
-    <!-- <button class="add-post-btn" onclick="addPost('New')">Add Post</button> -->
-    
-   <!-- <div class="post"><span>New Post Title</span><p>New post content goes here...</p></div>
-        <div class="post"><span>New Post Title</span><p>New post content goes here...</p></div>
-        <div class="post"><span>New Post Title</span><p>New post content goes here...</p></div>
-        <div class="post"><span>New Post Title</span><p>New post content goes here...</p></div>
-        <div class="post"><span>New Post Title</span><p>New post content goes here...</p></div>
-        <div class="post"><span>New Post Title</span><p>New post content goes here...</p></div> -->
-        
-        <c:choose>
-			<c:when test="${empty map.dtolist }">
+	<div id="thread_content">
+		<div id="New" class="content active">
+		
+		  <c:choose>
+			<c:when test="${empty map}">
 
 			</c:when>
 			<c:otherwise>
-				<c:forEach items="${map.dtolist }" var="vo" varStatus="vs">
+				<c:forEach items="${map}" var="vo" varStatus="vs">
 				
 					<div class="post"  onclick="window.location.href='${pageContext.request.contextPath }/thread?id=${vo.boardId }'" >
 							<div>${vo.subject }</div>
@@ -56,26 +47,34 @@
 					        <div>${vo.readCount }</div>
 					</div>
 					
+					
+					
 				</c:forEach>
+				
+		        <button class="load_button">Load more threads</button>
+						
 			</c:otherwise>
 		</c:choose>
+		
+	       
+	
+	    </div>
+	
+	    <div id="Top" class="content">
+	    </div>
+	
+	    <div id="Hot" class="content">
+	    </div>
+	</div>
+	
+	
+	</div>
 
-    </div>
-
-    <div id="Top" class="content">
-     <!--    <button class="add-post-btn" onclick="addPost('Top')">Add Post</button> -->
-    </div>
-
-    <div id="Hot" class="content">
-         <!-- <button class="add-post-btn" onclick="addPost('Hot')">Add Post</button> -->
-    </div>
-</div>
+    
 
 
 
 <script src="<%=request.getContextPath()%>/resources/javascript/topic/topic_body.js"> 
-
-	
 
 </script>
 

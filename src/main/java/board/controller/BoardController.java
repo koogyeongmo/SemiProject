@@ -13,14 +13,14 @@ import board.model.service.BoardService;
  * Servlet implementation class BoardReadController
  */
 @WebServlet("/thread")
-public class ThreadController extends HttpServlet {
+public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService service = new BoardService();
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ThreadController() {
+    public BoardController() {
         super();
         // TODO Auto-generated constructor stub
     }

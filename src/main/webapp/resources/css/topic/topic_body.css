@@ -126,10 +126,13 @@ body {
     display: none;
     padding-top: 10px;
     overflow-y: auto;
+    height: 100vh;
+    
 }
 
 .content.active {
     display: block;
+    
 }
 
 .create_button {
@@ -190,4 +193,24 @@ body {
 
 }
 
+.load_button {
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 0.1s;
+    color: white; 
+    width: 200px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 18px;
+    background-color: var(--main-color);
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    margin-left: 40%;
+
+}
+
+.load_button:hover {
+    background-color: var(--hover-color);
+}
 

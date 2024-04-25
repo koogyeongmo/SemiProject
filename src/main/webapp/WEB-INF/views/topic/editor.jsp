@@ -6,6 +6,13 @@
 <div class="editor_container">
 	<div class="main_container">
 	        <div class="editor_header">
+	        	<div class="back_to_topic_button" onClick="toggleMainPage2()">
+	        	    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+				    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+				    </svg>
+	   
+	        	</div>
+	        
 	            Create a post
 	            <div>
 	                <button class="post_button">Post</button>
@@ -19,8 +26,8 @@
 	        </div>
 	
 	        <div class="tab_editor">
-	            <button class="tablinks_editor active_editor" onclick="openTab(event, 'text')">Text</button>
-	            <button class="tablinks_editor" onclick="openTab(event, 'image')">Image</button>
+	            <button class="tablinks_editor active_editor" onclick="openTabEditor(event, 'text')">Text</button>
+	            <button class="tablinks_editor" onclick="openTabEditor(event, 'image')">Image</button>
 	        </div>
 	
 	        <div id="text" class="content_editor active_editor">
@@ -59,9 +66,6 @@
 	
 	    </div>
 </div>
-
-
-
       
       <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0/dist/quill.js"></script>
       
@@ -130,7 +134,7 @@
         }
     });
 
-    function openTab(evt, tabName) {
+    function openTabEditor(evt, tabName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("content_editor");
             for (i = 0; i < tabcontent.length; i++) {
@@ -209,6 +213,7 @@ function handleFiles(files) {
         uploadCounter.textContent = uploadedFiles + '/10 images uploaded';
     }
 }
+	
     
     
 

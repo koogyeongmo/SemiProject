@@ -93,6 +93,18 @@ public class BoardService {
 		return result;
 	}
 	
+	public List<BoardDto> selectBoardListDetail(int pageSize, int currentPageNum) {
+		int start = pageSize*(currentPageNum-1)+1;
+		int end = pageSize*currentPageNum;
+		
+		SqlSession session = getSqlSession();		
+		
+		List<BoardDto> result = dao.selectPageListDetail(session, start, end);
+		session.close();
+		
+		return result;
+	}
+	
 	
 	// select list - board reply
 	public List<BoardReplyListDto> selectBoardReplyList(Integer boardId) {

@@ -17,9 +17,9 @@
 		</div>
 	
 		<div class="page_wrapper">
-			<%@include file="/WEB-INF/views/topic/topic_body.jsp" %>
+			<%@include file="/WEB-INF/views/topic/topic_body.jsp" %> 			
 			<%@include file="/WEB-INF/views/topic/editor.jsp" %>
-			
+ 		
 			<%@include file="/WEB-INF/views/topic/topic_info.jsp" %>
 			
 		</div>
@@ -32,11 +32,17 @@
 	            if (threadWindow.style.display !== 'none') {
 	            	threadWindow.style.display = 'none';
 	            	editorWindow.style.display = 'block';
-	              } else {
-	            	  threadWindow.style.display = 'none';
-	            	  editorWindow.style.display = 'block';
+	              } 
+			}
+			
+			function toggleMainPage2() {
+				editorWindow = document.getElementsByClassName("editor_container")[0];
+	            threadWindow = document.getElementsByClassName("middle_column")[0];
 
-	              }
+	            if (editorWindow.style.display !== 'none') {
+	            	editorWindow.style.display = 'none';
+	            	threadWindow.style.display = 'block';
+	              } 
 			}
 
 		</script>
