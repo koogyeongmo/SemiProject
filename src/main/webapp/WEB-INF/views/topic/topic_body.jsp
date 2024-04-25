@@ -40,11 +40,11 @@
 				<c:forEach items="${map}" var="vo" varStatus="vs">
 				
 					<div class="post"  onclick="window.location.href='${pageContext.request.contextPath }/thread?id=${vo.boardId }'" >
-							<div>${vo.subject }</div>
+							<div>${vo.title }</div>
 					        <div>${vo.content }</div>
-					        <div>${vo.writeTime }</div>
-					        <div>${vo.boardWriter }</div>
-					        <div>${vo.readCount }</div>
+					        <div>${vo.postTime }</div>
+					        <div>${vo.userId }</div>
+					        <div>${vo.views }</div>
 					</div>
 					
 					

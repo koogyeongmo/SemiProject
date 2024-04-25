@@ -11,10 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import board.model.dto.BoardDto;
-import board.model.dto.BoardListDto;
 import board.model.service.BoardService;
 
-import topic.model.dto.TopicDto;
 import topic.model.dto.TopicDto;
 import topic.model.service.TopicService;
 
@@ -69,7 +67,7 @@ public class TopicController extends HttpServlet {
         		request.setAttribute("profile_image" , profile_image);
                 
         		
-        		request.setAttribute("map" , boardService.selectBoardListDetail(pageSize, currentPageNum));
+        		request.setAttribute("map" , boardService.selectBoardList(pageSize, currentPageNum));
                 
         		request.getRequestDispatcher("/WEB-INF/views/topic.jsp").forward(request, response);
                 return;

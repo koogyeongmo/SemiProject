@@ -1,44 +1,61 @@
 package board.model.dto;
 
-import java.util.List;
-
 public class BoardInsertDto {
-//	BOARD_ID     NOT NULL NUMBER         
-//	SUBJECT      NOT NULL VARCHAR2(120)  
-//	CONTENT      NOT NULL VARCHAR2(4000) 
-//	WRITE_TIME   NOT NULL TIMESTAMP(6)   
-//	LOG_IP                VARCHAR2(15)   
-//	BOARD_WRITER NOT NULL VARCHAR2(20)   
-//	READ_COUNT   NOT NULL NUMBER
-	private String subject;
+
+	private String topicId;
+	private String userId;
+	private String title;
 	private String content;
-	//private String logIp;
-	private String boardWriter;
-	private List<FileWriteDto> fileList;
-	@Override
-	public String toString() {
-		return "BoardInsertDto [subject=" + subject + ", content=" + content + ", boardWriter=" + boardWriter
-				+ ", fileList=" + fileList + "]";
-	}
-	public BoardInsertDto(String subject, String content, String boardWriter, List<FileWriteDto> fileList) {
+	
+	public BoardInsertDto() {
 		super();
-		this.subject = subject;
+	}
+	
+	public BoardInsertDto(String topicId, String userId, String title, String content) {
+		this.topicId = topicId;
+		this.userId = userId;
+		this.title = title;
 		this.content = content;
-		this.boardWriter = boardWriter;
-		this.fileList = fileList;
 	}
-	public String getSubject() {
-		return subject;
+
+	public String getTopicId() {
+		return topicId;
 	}
+
+	public void setTopicId(String topicId) {
+		this.topicId = topicId;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public String getContent() {
 		return content;
 	}
-	public String getBoardWriter() {
-		return boardWriter;
-	}
-	public List<FileWriteDto> getFileList() {
-		return fileList;
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
-
+	@Override
+	public String toString() {
+		return "BoardInsertDto [topicId=" + topicId + ", userId=" + userId + ", title=" + title + ", content=" + content
+				+ "]";
+	}
+	
+	
+	
 }

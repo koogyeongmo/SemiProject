@@ -215,8 +215,26 @@ function handleFiles(files) {
 }
 	
 	document.getElementsByClassName('post_button')[0].addEventListener('click', function() {
-	    var htmlContent = quill.root.innerHTML; 
-	    console.log(htmlContent);
+	    var threadInfo = {
+	    		topicId: "${topic_id}",
+	    		title:  document.getElementById("title_input").value,
+	    		content: quill.root.innerHTML,
+	    		userId: "${LoggedIn.memId}"
+	    		
+	    };
+	    
+		$.ajax({
+			url:"${pageContext.request.contextPath }/boardcreate"
+			, method : "post"
+			, data : threadInfo
+			, success : function(result){			
+				location.href="${pageContext.request.contextPath}/topic/" + "${topic_id}";
+			}
+			, error : console.log("Error")
+		});
+	    
+	    
+	    
 	});
     
 

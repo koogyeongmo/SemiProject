@@ -3,11 +3,11 @@
 
 <div class="middle_column">
         <div class="main_thread">
-            <div class="thread_title"> ${dto.subject }</div>
+            <div class="thread_title"> ${dto.title }</div>
             <div class="thread_user"> 
                 <img src="<%=request.getContextPath()%>/resources/images/default_profile_picture.jpg" class="mini_profile_pic">
                 &nbsp;&nbsp;
-                ${dto.boardWriter }
+                ${dto.userId }
             </div>
             <div class="thread_content"> 
             	${dto.content}
