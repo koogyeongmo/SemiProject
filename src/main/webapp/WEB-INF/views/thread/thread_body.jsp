@@ -3,14 +3,14 @@
 
 <div class="middle_column">
         <div class="main_thread">
-            <div class="thread_title"> ${dto.title }</div>
+            <div class="thread_title"> ${threadInfo.title }</div>
             <div class="thread_user"> 
                 <img src="<%=request.getContextPath()%>/resources/images/default_profile_picture.jpg" class="mini_profile_pic">
                 &nbsp;&nbsp;
-                ${dto.userId }
+                ${threadInfo.userId }
             </div>
             <div class="thread_content"> 
-            	${dto.content}
+            	${threadInfo.content}
             </div>
             <div class="thread_bottom_nav">
                 <div class="thread_vote">
@@ -50,6 +50,27 @@
             </button>
 
         </div>
+        
+        <c:choose>
+			<c:when test="${empty commentInfo}">
+
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${commentInfo}" var="vo" varStatus="vs">
+				
+					<div class="post">
+							<div>${vo.userId }</div>
+					        <div>${vo.content }</div>
+					</div>
+					
+					
+					
+				</c:forEach>
+				
+		        <button class="load_button">Load more comments</button>
+						
+			</c:otherwise>
+		</c:choose>
 
 
 </div>
@@ -151,6 +172,32 @@
 	flairs.forEach((flair, index) => {
 	const colorIndex = index % colors.length;
 	flair.style.backgroundColor = colors[colorIndex];
+	});
+	
+
+ 	document.getElementsByClassName('comment_button')[0].addEventListener('click', function() {
+ 		if  (document.getElementById("comment").value != '') {
+ 			
+ 		    var commentInfo = {
+ 		    		boardId: "${threadInfo.boardId}",
+ 		    		content:  document.getElementById("comment").value,
+ 		    		userId: "${LoggedIn.memId}"	
+ 		    };
+ 		    	    
+ 	 		$.ajax({
+ 				url:"${pageContext.request.contextPath }/createcomment.ajax"
+ 				, method : "post"
+ 				, data : commentInfo
+ 				, success : function(result){
+ 				location.href="${pageContext.request.contextPath }/thread?id=" + "${threadId}";
+ 	 		}
+ 				,     error: function(xhr, status, error) {
+ 			        console.log("Error: " + error);
+ 			    }
+ 			}); 
+ 			
+ 		}	    
+	    
 	});
 
 </script>

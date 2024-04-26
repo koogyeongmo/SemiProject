@@ -8,7 +8,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>topic</title>    
+    <title>topic</title> 
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+       
 </head>
 	<body>
 	
@@ -19,7 +21,7 @@
 		<div class="page_wrapper">
 			<%@include file="/WEB-INF/views/topic/topic_body.jsp" %> 			
 			<%@include file="/WEB-INF/views/topic/editor.jsp" %>
- 		
+
 			<%@include file="/WEB-INF/views/topic/topic_info.jsp" %>
 			
 		</div>

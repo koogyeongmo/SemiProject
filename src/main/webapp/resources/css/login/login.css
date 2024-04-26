@@ -295,8 +295,8 @@ user-select: none;
 
 .error_messages {
     position: absolute;
-    display: none;
-    /*temporary */
+/*     display: none;
+ */    /*temporary */
 }
 
 .email_exists {

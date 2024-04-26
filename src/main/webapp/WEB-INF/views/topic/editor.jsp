@@ -214,7 +214,7 @@ function handleFiles(files) {
     }
 }
 	
-	document.getElementsByClassName('post_button')[0].addEventListener('click', function() {
+ 	document.getElementsByClassName('post_button')[0].addEventListener('click', function() {
 	    var threadInfo = {
 	    		topicId: "${topic_id}",
 	    		title:  document.getElementById("title_input").value,
@@ -222,15 +222,17 @@ function handleFiles(files) {
 	    		userId: "${LoggedIn.memId}"
 	    		
 	    };
-	    
+	    	    
 		$.ajax({
-			url:"${pageContext.request.contextPath }/boardcreate"
+			url:"${pageContext.request.contextPath }/boardcreate.ajax"
 			, method : "post"
 			, data : threadInfo
 			, success : function(result){			
 				location.href="${pageContext.request.contextPath}/topic/" + "${topic_id}";
 			}
-			, error : console.log("Error")
+			,     error: function(xhr, status, error) {
+		        console.log("Error: " + error);
+		    }
 		});
 	    
 	    

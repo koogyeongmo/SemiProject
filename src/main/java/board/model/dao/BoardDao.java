@@ -8,6 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 
 import board.model.dto.BoardDto;
 import board.model.dto.BoardInsertDto;
+import board.model.dto.BoardInsertCommentDto;
+import board.model.dto.BoardCommentDto;
+
 
 
 
@@ -38,10 +41,13 @@ public class BoardDao {
 		return session.delete("boardMapper.delete", boardId);
 	}
 	
-	public int updateReadCount(SqlSession session, Integer boardId) {
-		return session.update("boardMapper.updateReadCount", boardId);
+	public int updateViewCount(SqlSession session, Integer boardId) {
+		return session.update("boardMapper.updateViewCount", boardId);
 	}
 
+	public int updateCommentCount(SqlSession session, Integer boardId) {
+		return session.update("boardMapper.updateCommentCount", boardId);
+	}
 	
 	public Integer selectTotalCount(SqlSession session) {
 		return session.selectOne("boardMapper.selectTotalCount");
@@ -52,9 +58,14 @@ public class BoardDao {
 	}
 
 	
+	public Integer insertComment(SqlSession session, BoardInsertCommentDto dto) {
+		return session.insert("boardMapper.insertComment", dto);
+	}
+	
 
-
-
+	public List<BoardCommentDto> selectCommentList(SqlSession session, Integer boardId) {
+		return session.selectList("boardMapper.selectCommentList", boardId);
+	}
 
 	
 }

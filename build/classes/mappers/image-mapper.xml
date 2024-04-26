@@ -3,10 +3,10 @@
 <mapper  namespace="imageMapper">
 	
     <insert id="uploadImage" parameterType="ImageDto">
-        INSERT INTO image_table (image_id, image_blob) VALUES (#{imageId}, #{imageBlob})
+        INSERT INTO image (image_id, image_blob) VALUES (#{imageId}, #{imageBlob})
     </insert>
     
 	<select id="retrieveImage" parameterType="string" resultType="ImageDto">
-		SELECT image_id, image_blob FROM image_table WHERE image_id=#{imageId}
+		SELECT image_id, image_blob FROM image WHERE image_id=#{imageId}
     </select>
 </mapper>

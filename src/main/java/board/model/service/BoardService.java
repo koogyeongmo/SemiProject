@@ -9,6 +9,9 @@ import static common.MybatisTemplate.*;
 import board.model.dao.BoardDao;
 import board.model.dto.BoardDto;
 import board.model.dto.BoardInsertDto;
+import board.model.dto.BoardInsertCommentDto;
+import board.model.dto.BoardCommentDto;
+
 
 
 public class BoardService {
@@ -32,7 +35,8 @@ public class BoardService {
 		SqlSession session = getSqlSession();
 		result = dao.selectOne(session, boardId);
 		if(result != null) {
-			dao.updateReadCount(session, boardId);
+			dao.updateViewCount(session, boardId);
+
 		}
 
 		session.close();
@@ -63,4 +67,25 @@ public class BoardService {
 		session.close();
 		return result;
 	}
+	
+	public List<BoardCommentDto> selectCommentList(Integer boardId) {
+		SqlSession session = getSqlSession();		
+		
+		List<BoardCommentDto> result = dao.selectCommentList(session, boardId);
+		session.close();
+		
+		return result;
+	}
+	
+	
+	
+	public int insertComment(BoardInsertCommentDto dto) {
+		int result = 0;
+		SqlSession session = getSqlSession();
+		result = dao.insertComment(session, dto);
+		dao.updateCommentCount(session, dto.getBoardId());
+		session.close();
+		return result;
+	}
+	
 }

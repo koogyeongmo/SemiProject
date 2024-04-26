@@ -11,13 +11,14 @@ public class BoardDto {
 	private String content;
 	private String postTime;  
 	private Integer views;
+	private Integer comments;
 	
 	public BoardDto() {
 		super();
 	}
 
 	public BoardDto(Integer boardId, String topicId, String userId, Integer upvote, Integer downvote, String title,
-			String content, String postTime, Integer views) {
+			String content, String postTime, Integer views, Integer comments) {
 		super();
 		this.boardId = boardId;
 		this.topicId = topicId;
@@ -28,13 +29,14 @@ public class BoardDto {
 		this.content = content;
 		this.postTime = postTime;
 		this.views = views;
+		this.comments = comments;
 	}
 
 	@Override
 	public String toString() {
 		return "BoardDto [boardId=" + boardId + ", topicId=" + topicId + ", userId=" + userId + ", upvote=" + upvote
 				+ ", downvote=" + downvote + ", title=" + title + ", content=" + content + ", postTime=" + postTime
-				+ ", views=" + views + "]";
+				+ ", views=" + views + ", comments=" + comments + "]";
 	}
 
 	public Integer getBoardId() {
@@ -109,5 +111,11 @@ public class BoardDto {
 		this.views = views;
 	}
 	
-	
+	public Integer getComments() {
+		return views;
+	}
+
+	public void setComments(Integer views) {
+		this.views = views;
+	}
 }

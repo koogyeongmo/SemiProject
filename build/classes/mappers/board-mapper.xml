@@ -3,15 +3,15 @@
 <mapper namespace="boardMapper">
 	
 	<select id="selectBoardList" resultType="BoardDto" parameterType="map">
-		select BOARD_ID, TOPIC_ID, USER_ID, UPVOTE, DOWNVOTE, TITLE, CONTENT, to_char(POST_TIME,'yyyy-mm-dd hh24:mi'),VIEWS 
+		select BOARD_ID, TOPIC_ID, USER_ID, UPVOTE, DOWNVOTE, TITLE, CONTENT, to_char(POST_TIME,'yyyy-mm-dd hh24:mi'),VIEWS, COMMENTS 
 			from (select t1.*, rownum rn  
-				from (SELECT BOARD_ID, TOPIC_ID, USER_ID, UPVOTE, DOWNVOTE, TITLE, CONTENT, POST_TIME,VIEWS FROM BOARD order by board_id desc) t1 )
+				from (SELECT BOARD_ID, TOPIC_ID, USER_ID, UPVOTE, DOWNVOTE, TITLE, CONTENT, POST_TIME,VIEWS, COMMENTS FROM BOARD order by board_id desc) t1 )
 		where rn between #{startRownum} and #{endRownum}
 	</select>
 	
 	
 	<select id="selectOne" resultType="BoardDto" parameterType="int">
-		SELECT BOARD_ID, TOPIC_ID, USER_ID, UPVOTE, DOWNVOTE, TITLE, CONTENT, POST_TIME,VIEWS 
+		SELECT BOARD_ID, TOPIC_ID, USER_ID, UPVOTE, DOWNVOTE, TITLE, CONTENT, POST_TIME,VIEWS, COMMENTS 
 		FROM BOARD WHERE BOARD_ID=#{boardId}
 	</select>
 	
@@ -35,9 +35,29 @@
 	SELECT SEQ_BOARD_ID.nextval seq FROM DUAL
 	</select>
 	
-	<update id="updateReadCount"  parameterType="int">
+	<update id="updateViewCount"  parameterType="int">
 		update board set views=views+1 where board_id=#{boardId}
 	</update>
+	
+	<update id="updateCommentCount"  parameterType="int">
+		update board set comments=comments+1 where board_id=#{boardId}
+	</update>
+	
+	
+
+	<select id="selectCommentList" resultType="BoardCommentDto" parameterType="int">
+		select BOARD_ID, USER_ID, CONTENT, to_char(POST_TIME,'yyyy-mm-dd hh24:mi'), UPVOTE, DOWNVOTE
+			FROM BOARD_COMMENT WHERE BOARD_ID=#{boardId}
+	</select>
+	
+
+	
+	
+	<insert id="insertComment" parameterType="BoardInsertCommentDto">
+		INSERT INTO BOARD_COMMENT (COMMENT_ID, BOARD_ID, USER_ID, CONTENT) 
+			VALUES (SEQ_COMMENT_ID.nextval, #{boardId}, #{userId}, #{content}) 
+	</insert>
+	
 	
 </mapper>
 
