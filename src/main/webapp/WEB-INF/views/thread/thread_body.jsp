@@ -29,11 +29,11 @@
                     </svg>
                     Comments
 
-                    12
+                    ${threadInfo.comments}
                 </div>
 
                 <div class="post_date">
-                    Posted on: <span>2024/02/23</span>
+                    Posted on: <span>${threadInfo.postTime}</span>
                 </div>
 
             </div>
@@ -74,76 +74,44 @@
 
 
 </div>
-        
-    
-<div class="right_column">
-    <div class="topic_info">
-        <div class="topic_info_name">
-            <div>
-                topic<b>/cats</b>
-            </div>
-            <button class="option_button">
-                <img src="<%=request.getContextPath()%>/resources/images/three_dots.png" id="three_dots_icon">
-            </button>
-        </div>
-        <div class="topic_info_description">
-            Pictures, videos, questions and articles featuring/about cats. 
-            Join us to share your love for cats and connect with fellow cat lovers!
-        </div>
-
-
-        <div class="topic_info_follow">
-            <div class="following_count"><b>12,589</b> Followers</div>
-
-            <button class="join_button"> Join </button>
-
-
-        </div>
-    </div>
-
-    <div class="sort_by_flair">
-        <span>Sort by flair</span>
-        <ul class="flair_list">
-            <li class="flair">Announcement</li>
-            <li class="flair">Question</li>
-            <li class="flair">Image</li>
-            <li class="flair">Video</li>
-            <li class="flair">Meme</li>
-            <li class="flair">Event</li>
-
-          </ul>
-
-    </div>
-
-    <div class="rules_list">
-        <span>Community rules </span>
-        <ol>
-            <li> <span>Be respectful towards others.</span> </li>
-            <li> <span>No spam, NSFW, or self promotion. </span></li>
-            <li><span> Don't post copyrighted content.</span> </li>
-            <li><span> Check before asking a question. </span></li>
-            <li><span> No reposts. </span></li>
-        </ol>
-
-    </div>
-
-</div>
 
 <script>
     var textarea = document.getElementById('comment');
     var textareacontainer = document.getElementsByClassName('post_comment')[0];
-
     textarea.addEventListener('keydown', autosize);
+    
+    document.getElementsByClassName('comment_button')[0].addEventListener('click', function() {
+ 		if  (document.getElementById("comment").value != '') {
+ 			
+ 		    var commentInfo = {
+ 		    		boardId: "${threadInfo.boardId}",
+ 		    		content:  document.getElementById("comment").value,
+ 		    		userId: "${LoggedIn.memId}"	
+ 		    };
+ 		    	    
+ 	 		$.ajax({
+ 				url:"${pageContext.request.contextPath }/createcomment.ajax"
+ 				, method : "post"
+ 				, data : commentInfo
+ 				, success : function(result){
+ 				location.href="${pageContext.request.contextPath }/thread" + "/${topic_id}"  + "/${threadId}";
+ 	 		}
+ 				,     error: function(xhr, status, error) {
+ 			        console.log("Error: " + error);
+ 			    }
+ 			}); 
+ 		}	    
+	});
                 
     function autosize(){
-    var height = this;  
-    setTimeout(function(){
-        height.style.cssText = 'height:auto; padding:0';
-        height.style.cssText = 'height:' + height.scrollHeight + 'px';
-        height.style.cssText = 'height:' + height.scrollHeight + 'px';
-        textareacontainer.style = 'height:' + height.scrollHeight + 'px';
-        },0);
-    
+	    var height = this;  
+	    setTimeout(function(){
+	        height.style.cssText = 'height:auto; padding:0';
+	        height.style.cssText = 'height:' + height.scrollHeight + 'px';
+	        height.style.cssText = 'height:' + height.scrollHeight + 'px';
+	        textareacontainer.style = 'height:' + height.scrollHeight + 'px';
+	        },0);
+	    
     }
     
     function openTab(evt, tabName) {
@@ -159,45 +127,6 @@
         document.getElementById(tabName).style.display = "block";
         evt.currentTarget.className += " active";
     }
-
-	function addPost(tabName) {
-	var tabContent = document.getElementById(tabName);
-	var postHTML = '<div class="post"><span>New Post Title</span><p>New post content goes here...</p></div>';
-	tabContent.insertAdjacentHTML('beforeend', postHTML);
-	}
 	
-	const flairs = document.querySelectorAll('.flair');
-	const colors = ['#CC5289', '#B3A3B3', '#C04BF7', '#3083FF', '#47B2B2', '#EBC633'];
-	
-	flairs.forEach((flair, index) => {
-	const colorIndex = index % colors.length;
-	flair.style.backgroundColor = colors[colorIndex];
-	});
-	
-
- 	document.getElementsByClassName('comment_button')[0].addEventListener('click', function() {
- 		if  (document.getElementById("comment").value != '') {
- 			
- 		    var commentInfo = {
- 		    		boardId: "${threadInfo.boardId}",
- 		    		content:  document.getElementById("comment").value,
- 		    		userId: "${LoggedIn.memId}"	
- 		    };
- 		    	    
- 	 		$.ajax({
- 				url:"${pageContext.request.contextPath }/createcomment.ajax"
- 				, method : "post"
- 				, data : commentInfo
- 				, success : function(result){
- 				location.href="${pageContext.request.contextPath }/thread?id=" + "${threadId}";
- 	 		}
- 				,     error: function(xhr, status, error) {
- 			        console.log("Error: " + error);
- 			    }
- 			}); 
- 			
- 		}	    
-	    
-	});
 
 </script>

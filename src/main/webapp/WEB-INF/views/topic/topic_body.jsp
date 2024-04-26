@@ -39,7 +39,7 @@
 			<c:otherwise>
 				<c:forEach items="${map}" var="vo" varStatus="vs">
 				
-					<div class="post"  onclick="window.location.href='${pageContext.request.contextPath }/thread?id=${vo.boardId }'" >
+					<div class="post"  onclick="window.location.href='${pageContext.request.contextPath }/thread/${vo.topicId}/${vo.boardId}'" >
 							<div>${vo.title }</div>
 					        <div>${vo.content }</div>
 					        <div>${vo.postTime }</div>

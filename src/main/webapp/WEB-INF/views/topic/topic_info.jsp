@@ -51,7 +51,7 @@
 
     </div>
     
-    <script src="<%=request.getContextPath()%>/resources/javascript/topic/topic_info.js"> 
+    <script src="<%=request.getContextPath()%>/resources/javascript/topic/topic_info.js">     
 	</script>
 
 </div>

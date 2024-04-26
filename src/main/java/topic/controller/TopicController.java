@@ -75,7 +75,5 @@ public class TopicController extends HttpServlet {
         }
 	    response.sendError(HttpServletResponse.SC_NOT_FOUND);
 	}
-	
-	
 
 }

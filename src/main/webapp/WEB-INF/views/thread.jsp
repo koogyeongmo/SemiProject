@@ -21,6 +21,7 @@
 		
 		<div class="page_wrapper">
 			<%@include file="/WEB-INF/views/thread/thread_body.jsp" %>
+			<%@include file="/WEB-INF/views/topic/topic_info.jsp" %>
 		
 		</div>
 	</body>
