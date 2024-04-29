@@ -3,20 +3,28 @@ package image.model.dto;
 import java.util.Arrays;
 
 public class ImageDto {
-	private String imageId;
+	private Integer imageId;
 	private byte[] imageBlob;
+	private Integer boardId;
+	private String imageType;
+	
+	public ImageDto() {
+		super();
+	}
 
-	public ImageDto(String imageId, byte[] imageBlob) {
+	public ImageDto(Integer imageId, byte[] imageBlob, Integer boardId, String imageType) {
 		super();
 		this.imageId = imageId;
 		this.imageBlob = imageBlob;
+		this.boardId = boardId;
+		this.imageType = imageType;
 	}
 
-	public String getImageId() {
+	public Integer getImageId() {
 		return imageId;
 	}
 
-	public void setImageId(String imageId) {
+	public void setImageId(Integer imageId) {
 		this.imageId = imageId;
 	}
 
@@ -28,9 +36,27 @@ public class ImageDto {
 		this.imageBlob = imageBlob;
 	}
 
+	public Integer getBoardId() {
+		return boardId;
+	}
+
+	public void setBoardId(Integer boardId) {
+		this.boardId = boardId;
+	}
+
+	public String getImageType() {
+		return imageType;
+	}
+
+	public void setImageType(String imageType) {
+		this.imageType = imageType;
+	}
+
 	@Override
 	public String toString() {
-		return "ImageDto [imageId=" + imageId + ", imageBlob=" + Arrays.toString(imageBlob) + "]";
+		return "ImageDto [imageId=" + imageId + ", imageBlob=" + Arrays.toString(imageBlob) + ", boardId=" + boardId
+				+ ", imageType=" + imageType + "]";
 	}
+
 
 }

@@ -349,3 +349,10 @@ box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 	display: flex;
 	background-color: var(--background-color);
 }
+
+ .comment_profile_icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}

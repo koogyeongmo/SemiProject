@@ -148,7 +148,7 @@
             evt.currentTarget.className += " active_editor";
     }
 
-    var uploadedFiles = 0;
+/*     var uploadedFiles = 0;
 
 function allowDrop(event) {
     event.preventDefault();
@@ -213,9 +213,144 @@ function handleFiles(files) {
         uploadCounter.textContent = uploadedFiles + '/10 images uploaded';
     }
 }
-	
+	 */
+	 
+	 var uploadedFileList = [];
+	 var threadId = 123;
+
+	 function allowDrop(event) {
+	     event.preventDefault();
+	 }
+
+	 function drop(event) {
+	     event.preventDefault();
+	     var fileList = event.dataTransfer.files;
+	     handleFiles(fileList);
+	 }
+
+	 function selectFiles() {
+	     document.getElementById('file-input').click();
+	 }
+
+	 function handleFiles(files) {
+	     var fileListElement = document.getElementById('file-list');
+	     var uploadCounter = document.getElementById('upload_count');
+
+	     for (var i = 0; i < files.length; i++) {
+	         var file = files[i];
+	         var listItem = document.createElement('li');
+	         var fileInfo = document.createElement('div');
+	         fileInfo.className = 'file-info';
+
+	         var fileImage = document.createElement('img');
+	         fileImage.src = URL.createObjectURL(file);
+	         fileInfo.appendChild(fileImage);
+
+	         var fileDetails = document.createElement('div');
+	         fileDetails.textContent = file.name;
+	         fileInfo.appendChild(fileDetails);
+	         fileDetails.className = 'file_info_name';
+
+	         var deleteButton = document.createElement('div');
+	         deleteButton.className = 'delete-button';
+	         deleteButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">' +
+	             '<path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/> </svg>';
+	         deleteButton.onclick = function () {
+	             listItem.remove();
+	             removeFromUploadedFiles(file);
+	             uploadCounter.textContent = uploadedFileList.length + '/10 images uploaded';
+	         };
+	         fileInfo.appendChild(deleteButton);
+
+	         listItem.appendChild(fileInfo);
+	         fileListElement.appendChild(listItem);
+	         uploadedFileList.push(file);
+	         uploadCounter.textContent = uploadedFileList.length + '/10 images uploaded';
+	     }
+	 }
+
+	 function removeFromUploadedFiles(file) {
+	     var index = uploadedFileList.indexOf(file);
+	     if (index !== -1) {
+	         uploadedFileList.splice(index, 1);
+	     }
+	 }
+	 
+	// Function to convert data URI to Blob
+	 function dataURLtoBlob(dataURI) {
+	     var byteString = atob(dataURI.split(',')[1]);
+	     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+	     var arrayBuffer = new ArrayBuffer(byteString.length);
+	     var uint8Array = new Uint8Array(arrayBuffer);
+
+	     for (var i = 0; i < byteString.length; i++) {
+	         uint8Array[i] = byteString.charCodeAt(i);
+	     }
+
+	     return new Blob([arrayBuffer], { type: mimeString });
+	 }
+
+	// Function to upload Blob, file type, and additional data to servlet
+	 function uploadBlobToServlet(blob, fileType, threadId) {
+	     // Create FormData object to send data
+	     var formData = new FormData();
+	     formData.append('blob', blob);
+	     formData.append('fileType', fileType);
+	     /* formData.append('boardId', threadId); */
+	     formData.append('boardId', '123');
+
+	     // Create XMLHttpRequest object
+	     var xhr = new XMLHttpRequest();
+	     xhr.open('POST', '${pageContext.request.contextPath}/ImageController', true);
+
+	     // Set onload and onerror handlers
+	     xhr.onload = function() {
+	         if (xhr.status === 200) {
+	             // Request was successful
+	             console.log('Image uploaded successfully.');
+	         } else {
+	             // Error handling
+	             console.error('Error uploading image. Status:', xhr.status);
+	         }
+	     };
+
+	     xhr.onerror = function() {
+	         console.error('Network error occurred while trying to upload the image.');
+	     };
+
+	     xhr.send(formData);
+	 }
+
+	 // Convert files in uploadedFileList to Blobs and send them to the servlet
+	 function sendFilesToServlet(threadId) {
+	     // Loop through each file in uploadedFileList
+	     uploadedFileList.forEach(function(file) {
+	         // Create a FileReader object
+	         var reader = new FileReader();
+
+	         // Set onload event handler
+	         reader.onload = function(event) {
+	             // Convert data URL to Blob
+	             var blob = dataURLtoBlob(event.target.result);
+
+	             // Send Blob, file type, and thread_id to servlet
+	             uploadBlobToServlet(blob, file.type, threadId);
+	         };
+
+	         // Read the file as a data URL
+	         reader.readAsDataURL(file);
+	     });
+	 }
+
+
+	 
  	document.getElementsByClassName('post_button')[0].addEventListener('click', function() {
-	    var threadInfo = {
+ 		 sendFilesToServlet(threadId);
+
+ 	
+ 		
+ 		
+ 	    var threadInfo = {
 	    		topicId: "${topic_id}",
 	    		title:  document.getElementById("title_input").value,
 	    		content: quill.root.innerHTML,
@@ -232,9 +367,9 @@ function handleFiles(files) {
 			}
 			,     error: function(xhr, status, error) {
 		        console.log("Error: " + error);
-		    }
+		    } 
 		});
-	    
+ 		
 	    
 	    
 	});

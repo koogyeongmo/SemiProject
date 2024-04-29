@@ -59,6 +59,11 @@
 				<c:forEach items="${commentInfo}" var="vo" varStatus="vs">
 				
 					<div class="post">
+						<div>
+					        <img src="<%=request.getContextPath()%>/resources/images/default_profile_picture.jpg" class="comment_profile_icon">
+						
+						</div>
+					
 							<div>${vo.userId }</div>
 					        <div>${vo.content }</div>
 					</div>

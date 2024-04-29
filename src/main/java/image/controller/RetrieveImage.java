@@ -26,16 +26,25 @@ public class RetrieveImage extends HttpServlet {
 
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ImageDto imageDto = new ImageService().retrieveImage("123");
+        ImageDto imageDto = new ImageService().retrieveImage(123);
+        System.out.println(imageDto);
+        // Check if the ImageDto object is not null
+        if (imageDto != null) {
+            // Get the image data from the ImageDto object
+            byte[] imageData = imageDto.getImageBlob();
 
-        byte[] imageData = imageDto.getImageBlob();
+            // Set the content type to indicate that the response contains image data
+            response.setContentType("image/jpeg");
 
-        response.setContentType("image/jpeg");
-
-        try (ServletOutputStream out = response.getOutputStream()) {
-            out.write(imageData);
-        } catch (IOException e) {
-            e.printStackTrace();
+            // Write the image data to the response output stream
+            try (ServletOutputStream out = response.getOutputStream()) {
+                out.write(imageData);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // If the ImageDto object is null, handle the error accordingly
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 }

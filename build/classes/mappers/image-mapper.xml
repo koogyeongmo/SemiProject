@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper  namespace="imageMapper">
 	
-    <insert id="uploadImage" parameterType="ImageDto">
-        INSERT INTO image (image_id, image_blob) VALUES (#{imageId}, #{imageBlob})
+    <insert id="uploadImage" parameterType="ImageInsertDto">
+        INSERT INTO IMAGE (IMAGE_ID, IMAGE_BLOB, BOARD_ID, IMAGE_TYPE) VALUES (SEQ_IMAGE_ID.NEXTVAL, #{imageBlob}, #{boardId}, #{imageType})
     </insert>
     
-	<select id="retrieveImage" parameterType="string" resultType="ImageDto">
-		SELECT image_id, image_blob FROM image WHERE image_id=#{imageId}
+	<select id="retrieveImage" parameterType="int" resultType="ImageDto">
+		SELECT IMAGE_ID, IMAGE_BLOB, BOARD_ID, IMAGE_TYPE FROM IMAGE WHERE BOARD_ID=#{boardId}
     </select>
 </mapper>

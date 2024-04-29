@@ -1,46 +1,54 @@
 
 package image.controller;
 
-import java.io.*;
-import java.util.Base64;
-
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Collection;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import image.model.service.ImageService;
 import image.model.dto.ImageDto;
+import image.model.dto.ImageInsertDto;
 
 
 
 @WebServlet("/ImageController")
+
+@MultipartConfig(
+	    fileSizeThreshold = 1024 * 1024,  // 1 MB
+	    maxFileSize = 1024 * 1024 * 10,   // 10 MB
+	    maxRequestSize = 1024 * 1024 * 50 // 50 MB
+	)
+
 public class ImageController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-    	InputStream inputStream = request.getInputStream();
+        Part blobPart = request.getPart("blob");
+        byte[] imageBlob = processBlob(blobPart);
 
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        
-        byte[] buffer = new byte[1024];
-        int bytesRead;
-        while ((bytesRead = inputStream.read(buffer)) != -1) {
-            outputStream.write(buffer, 0, bytesRead);
-        }
-        
+        int threadId = Integer.parseInt(request.getParameter("boardId"));
+        String imageType = request.getParameter("fileType");
 
-        
-        byte[] blob = outputStream.toByteArray();
-        
-        String base64Blob = Base64.getEncoder().encodeToString(blob);
-                
-        
-        ImageDto dto = new ImageDto("123", blob);
- 
+        ImageInsertDto dto = new ImageInsertDto(threadId, imageBlob, imageType);
+        System.out.println(dto);
+
         int result = new ImageService().uploadImage(dto);
-        
-        System.out.println(result);
+
+        response.getWriter().println("Upload successful");
+    }
+
+    private byte[] processBlob(Part blobPart) throws IOException {
+        try (InputStream inputStream = blobPart.getInputStream()) {
+            byte[] imageBlob = inputStream.readAllBytes();
+            return imageBlob;
+        }
     }
 }
