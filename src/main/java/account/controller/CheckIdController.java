@@ -1,48 +1,56 @@
 package account.controller;
 
 import java.io.IOException;
+
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import member.model.dto.MemberDto;
 import member.model.service.MemberService;
 
 /**
- * Servlet implementation class JoinController
+ * Servlet implementation class CheckIdController
  */
-@WebServlet("/join")
-public class JoinController extends HttpServlet {
+@WebServlet("/checkid.ajax")
+public class CheckIdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JoinController() {
+    public CheckIdController() {
         super();
     }
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memId = request.getParameter("username");
-		String memPwd = request.getParameter("pwd");
-		String memEmail = request.getParameter("email");
-		MemberDto dto = new MemberDto(memId, memPwd, memEmail);
-		System.out.println(dto);
-		int result = new MemberService().insert(dto);
-		if(result < 0 ) {
-
-			response.sendRedirect(request.getContextPath()+"/main");
-			return;
-		}
+		System.out.println("###checkid  doPost 진입");
+		String k1 = request.getParameter("k1");
+		String k2 = request.getParameter("k2");
+		System.out.println(k1+","+k2);
+	
+		String memId = request.getParameter("cid");
+		System.out.println(memId);
+		int result = new MemberService().selectCheckId(memId);
+		response.getWriter().append(String.valueOf(result));	
 		
-		response.getWriter().append(String.valueOf(result));
+
 
 	}
+
 }
-	
+
+
+
+
+
+
+
+

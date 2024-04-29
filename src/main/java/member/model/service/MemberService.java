@@ -39,6 +39,15 @@ public class MemberService {
 		return result;
 	}
 	
+	public int selectCheckEmail(String memEmail) {
+		int result = 0;
+		SqlSession session = getSqlSession();
+		result = dao.selectCheckEmail(session, memEmail);
+		session.close();
+		return result;
+	}
+	
+	
 	// select list - all
 	public List<MemberDto> selectAllList() {
 		List<MemberDto> result = null;

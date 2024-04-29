@@ -23,6 +23,10 @@ public class MemberDao {
 		return session.selectOne("memberMapper.selectCheckId", memId);
 	}
 	
+	public int selectCheckEmail(SqlSession session, String memEmail) {
+		return session.selectOne("memberMapper.selectCheckEmail", memEmail);
+	}
+	
 	// select list - all
 	public List<MemberDto> selectAllList(SqlSession session) {
 		return session.selectList("memberMapper.selectAllList");

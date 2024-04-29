@@ -14,6 +14,10 @@
 	SELECT COUNT(*) c  FROM MEMBER WHERE USERNAME=#{memId}
 </select>
 
+<select id="selectCheckEmail" parameterType="string" resultType="int">
+	SELECT COUNT(*) c  FROM MEMBER WHERE EMAIL=#{memEmail}
+</select>
+
 <select id="selectAllList" resultType="MemberDto">
 	SELECT USERNAME,PASSWORD,EMAIL    FROM MEMBER
 </select>

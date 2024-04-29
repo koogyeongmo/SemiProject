@@ -13,6 +13,10 @@
        
 </head>
 	<body>
+		<c:if test="${empty LoggedIn}">
+		    <c:redirect url="${request.contextPath}/login" />
+		</c:if>
+	
 	
 		<div class="sidebar_wrapper">
 			<%@include file="/WEB-INF/views/common/sidebar.jsp" %>

@@ -1,4 +1,5 @@
 <link href="<%=request.getContextPath()%>/resources/css/common/sidebar.css" rel="stylesheet">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="sidebar">
   <div class="sidebar_logo">
@@ -47,15 +48,22 @@
           <div class="online"> </div>
       </div>
       <span>
-          Username
+          ${LoggedIn.memId}
       </span>
   </button>
   <div class="profile_dropdown_content">
-      <a href="#">Link 1</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
+      <div> 
+      
+		<form action="${pageContext.request.contextPath}/logout" method="post">
+		<div><button type="submit" class="logout_button">Log Out</button></div>
+		</form>
+      
+      </div>
+
   </div>
 
 </div>
 
-<script src="<%=request.getContextPath()%>/resources/javascript/sidebar.js"> </script>
+<script src="<%=request.getContextPath()%>/resources/javascript/sidebar.js"> 
+
+</script>
