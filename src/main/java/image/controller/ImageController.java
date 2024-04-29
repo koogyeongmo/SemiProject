@@ -34,7 +34,7 @@ public class ImageController extends HttpServlet {
         Part blobPart = request.getPart("blob");
         byte[] imageBlob = processBlob(blobPart);
 
-        int threadId = Integer.parseInt(request.getParameter("boardId"));
+        int threadId = (Integer) request.getSession().getAttribute("lastBoardId");
         String imageType = request.getParameter("fileType");
 
         ImageInsertDto dto = new ImageInsertDto(threadId, imageBlob, imageType);

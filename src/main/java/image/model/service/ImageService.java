@@ -2,8 +2,11 @@ package image.model.service;
 
 import static common.MybatisTemplate.*;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
+import board.model.dto.BoardCommentDto;
 import image.model.dto.ImageDto;
 import image.model.dto.ImageInsertDto;
 
@@ -24,6 +27,15 @@ public class ImageService {
 		SqlSession session = getSqlSession();
 		ImageDto result = dao.retrieveImage(session, boardId);
 		session.close();
+		return result;
+	}
+	
+	public List<ImageDto> selectImageList(int boardId) {
+		SqlSession session = getSqlSession();		
+		
+		List<ImageDto> result = dao.selectImageList(session, boardId);
+		session.close();
+		
 		return result;
 	}
 

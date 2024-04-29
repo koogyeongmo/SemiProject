@@ -12,12 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.rowset.serial.SerialBlob;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import image.model.dto.*;
 import image.model.service.ImageService;
 
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 
 @WebServlet("/retrieveimage")
@@ -26,24 +29,30 @@ public class RetrieveImage extends HttpServlet {
 
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ImageDto imageDto = new ImageService().retrieveImage(123);
-        System.out.println(imageDto);
-        // Check if the ImageDto object is not null
-        if (imageDto != null) {
-            // Get the image data from the ImageDto object
-            byte[] imageData = imageDto.getImageBlob();
+        List<ImageDto> imageDtoList = new ImageService().selectImageList(123);
 
-            // Set the content type to indicate that the response contains image data
-            response.setContentType("image/jpeg");
+        if (imageDtoList != null) {
+            // Create a list to store data URLs for each image
+            List<String> imageDataUrls = new ArrayList<>();
 
-            // Write the image data to the response output stream
-            try (ServletOutputStream out = response.getOutputStream()) {
-                out.write(imageData);
-            } catch (IOException e) {
-                e.printStackTrace();
+            // Convert each image to a data URL and add it to the list
+            for (ImageDto imageDto : imageDtoList) {
+                String imageType = imageDto.getImageType();
+                byte[] imageData = imageDto.getImageBlob();
+                String base64ImageData = Base64.getEncoder().encodeToString(imageData);
+                String dataUrl = "data:" + imageType + ";base64," + base64ImageData;
+                imageDataUrls.add(dataUrl);
             }
+
+            // Convert the list of data URLs to a JSON array
+            String jsonData = new Gson().toJson(imageDataUrls);
+
+            // Set the response type to JSON
+            response.setContentType("application/json");
+
+            // Write the JSON data to the response
+            response.getWriter().write(jsonData);
         } else {
-            // If the ImageDto object is null, handle the error accordingly
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
     }

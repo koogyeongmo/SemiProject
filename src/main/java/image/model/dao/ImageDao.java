@@ -1,7 +1,10 @@
 package image.model.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
+import board.model.dto.BoardCommentDto;
 import image.model.dto.ImageDto;
 import image.model.dto.ImageInsertDto;
 
@@ -17,5 +20,8 @@ public class ImageDao {
 		return session.selectOne("imageMapper.retrieveImage", boardId);
 	}
 
+	public List<ImageDto> selectImageList(SqlSession session, int boardId) {
+		return session.selectList("imageMapper.selectImageList", boardId);
+	}
 	
 }

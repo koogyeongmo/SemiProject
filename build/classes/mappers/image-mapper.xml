@@ -9,4 +9,9 @@
 	<select id="retrieveImage" parameterType="int" resultType="ImageDto">
 		SELECT IMAGE_ID, IMAGE_BLOB, BOARD_ID, IMAGE_TYPE FROM IMAGE WHERE BOARD_ID=#{boardId}
     </select>
+    
+	<select id="selectImageList" resultType="ImageDto" parameterType="Integer">
+		SELECT IMAGE_ID, IMAGE_BLOB, BOARD_ID, IMAGE_TYPE FROM IMAGE WHERE BOARD_ID=#{boardId}
+	</select>
+	
 </mapper>

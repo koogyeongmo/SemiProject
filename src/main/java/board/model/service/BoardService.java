@@ -88,4 +88,12 @@ public class BoardService {
 		return result;
 	}
 	
+	public int getSequenceNum() {
+		SqlSession session = getSqlSession();
+		int result = dao.getSequenceNum(session);
+		session.close();
+		
+		return result;
+	}
+	
 }

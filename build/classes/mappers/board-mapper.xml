@@ -22,7 +22,7 @@
 
 	<insert id="insert" parameterType="BoardInsertDto">
 		INSERT INTO BOARD (BOARD_ID, TOPIC_ID, USER_ID, TITLE, CONTENT) 
-			VALUES (SEQ_BOARD_ID.nextval, #{topicId}, #{userId}, #{title}, #{content}) 
+			VALUES (#{boardId}, #{topicId}, #{userId}, #{title}, #{content}) 
 	</insert>
 	
 	

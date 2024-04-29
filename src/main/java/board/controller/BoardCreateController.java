@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import board.model.dto.BoardInsertDto;
 import board.model.service.BoardService;
@@ -30,8 +31,11 @@ public class BoardCreateController extends HttpServlet {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		
+		int boardId = boardService.getSequenceNum();
 		
-		BoardInsertDto newBoard = new BoardInsertDto(topicId, userId, title, content);
+		request.getSession().setAttribute("lastBoardId", boardId);
+		
+		BoardInsertDto newBoard = new BoardInsertDto(boardId, topicId, userId, title, content);
 		
         int insert = boardService.insert(newBoard);
 

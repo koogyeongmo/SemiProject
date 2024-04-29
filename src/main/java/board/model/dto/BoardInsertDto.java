@@ -1,7 +1,8 @@
 package board.model.dto;
 
 public class BoardInsertDto {
-
+	
+	private int boardId;
 	private String topicId;
 	private String userId;
 	private String title;
@@ -11,11 +12,20 @@ public class BoardInsertDto {
 		super();
 	}
 	
-	public BoardInsertDto(String topicId, String userId, String title, String content) {
+	public BoardInsertDto(int boardId, String topicId, String userId, String title, String content) {
+		this.boardId = boardId;
 		this.topicId = topicId;
 		this.userId = userId;
 		this.title = title;
 		this.content = content;
+	}
+
+	public int getBoardId() {
+		return boardId;
+	}
+
+	public void setBoardId(int boardId) {
+		this.boardId = boardId;
 	}
 
 	public String getTopicId() {
@@ -52,7 +62,7 @@ public class BoardInsertDto {
 
 	@Override
 	public String toString() {
-		return "BoardInsertDto [topicId=" + topicId + ", userId=" + userId + ", title=" + title + ", content=" + content
+		return "BoardInsertDto [boardId" + boardId +", topicId=" + topicId + ", userId=" + userId + ", title=" + title + ", content=" + content
 				+ "]";
 	}
 	

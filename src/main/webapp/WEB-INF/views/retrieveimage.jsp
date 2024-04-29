@@ -11,28 +11,25 @@
 <body>
 	<div class="here">
 	</div>
-	<script>
-	var xhr = new XMLHttpRequest();
-	xhr.open("GET", "retrieveimage");
-	xhr.responseType = "blob";
-	xhr.onload = function() {
-	    if (xhr.status === 200) { 
-	        var blob = xhr.response; 
-	        var reader = new FileReader();
-	        reader.onload = function(event) {
-	            var base64 = event.target.result;
-	            var imageUrl = 'data:image/jpeg;base64,' + base64.split(',')[1];
-	            var image = document.createElement("img");
-	            image.src = imageUrl;
-	            document.body.appendChild(image); 
-	        };
-	        reader.readAsDataURL(blob);
-	    } else {
-	        console.error("Failed to load blob. Status code: " + xhr.status);
-	    }
-	};
-	xhr.send();
-	</script>
+<script>
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "retrieveimage");
+    xhr.responseType = "json";
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var imageDataUrls = xhr.response;
+
+            imageDataUrls.forEach(function(dataUrl) {
+                var image = document.createElement("img");
+                image.src = dataUrl;
+                document.body.appendChild(image);
+            });
+        } else {
+            console.error("Failed to load image data. Status code: " + xhr.status);
+        }
+    };
+    xhr.send();
+</script>
     
 </body>
 </html>
