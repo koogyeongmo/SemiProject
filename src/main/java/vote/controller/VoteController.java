@@ -40,7 +40,10 @@ public class VoteController extends HttpServlet {
 		        boardService.upvote(boardId);
 		        voteService.insert(voteDto);
 		    } else if ("downvote".equals(voteType)) {
-		    	System.out.println("testtt");
+		        boardService.downvote(boardId);
+		        voteService.insert(voteDto);
+
+		    } else if ("remove".equals(voteType)) {
 		        boardService.downvote(boardId);
 		        voteService.insert(voteDto);
 
