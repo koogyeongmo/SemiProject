@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="voteMapper">
+
+	<insert id="insert" parameterType="voteDto">
+	    INSERT INTO USER_VOTE (USER_ID, BOARD_ID, VOTE_TYPE)
+	    SELECT #{userId}, #{boardId}, #{voteType}
+	    FROM DUAL
+	    WHERE NOT EXISTS (
+	        SELECT 1
+	        FROM USER_VOTE
+	        WHERE USER_ID = #{userId} AND BOARD_ID = #{boardId}
+	    )
+	</insert>
+
+	<delete id="delete"  parameterType="voteTransferDto">
+		DELETE FROM USER_VOTE WHERE BOARD_ID=#{boardId} AND USER_ID=#{userId}
+	</delete>
+	
+	<select id="check" parameterType="voteTransferDto" resultType="String">
+		SELECT VOTE_TYPE FROM USER_VOTE WHERE BOARD_ID=#{boardId} AND USER_ID=#{userId}
+	</select>
+	
+	
+</mapper>
+
+
+
+
+

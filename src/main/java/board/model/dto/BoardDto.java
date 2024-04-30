@@ -98,6 +98,10 @@ public class BoardDto {
 	public String getPostTime() {
 		return postTime;
 	}
+	
+	public String getDate() {
+		return postTime.split(" ")[0];
+	}
 
 	public void setPostTime(String postTime) {
 		this.postTime = postTime;
@@ -118,4 +122,10 @@ public class BoardDto {
 	public void setComments(Integer views) {
 		this.views = views;
 	}
+	
+	public int getVoteCount() {
+
+		return upvote - downvote;
+	}
+	
 }

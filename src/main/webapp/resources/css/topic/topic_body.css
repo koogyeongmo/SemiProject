@@ -61,15 +61,10 @@ body {
     min-height: 100px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     font-size: 16px;
-    cursor: pointer;
-
+    position: relative;
+    overflow: hidden;
 }
 
-
-.post > :first-child {
-    font-size: 20px;
-    font-weight: 600;
-}
 
 .add-post-btn {
     background-color: #007bff;
@@ -212,4 +207,107 @@ body {
 .load_button:hover {
     background-color: var(--hover-color);
 }
+
+.thread_title {
+    font-size: 24px;
+    font-weight: 600;
+    padding-bottom: 10px;
+}
+
+.thread_user {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.comment_profile_icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.thread_content {
+	margin-bottom: 40px;
+	
+}
+
+.thread_bottom_nav {
+    display: flex;
+    padding-top: 20px;
+    gap: 20px;
+    height: 30px;
+	align-items: center;
+	bottom: 5;
+	position: absolute;
+	width: 100%;
+	font-size: 16px;
+}
+
+.thread_vote {
+	width: 90px;
+	height: 30px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    gap: 10px;
+}
+
+.upvote:hover {
+    fill: var(--main-color);
+}
+
+.downvote:hover {
+    fill: var(--blue);
+}
+
+.thread_comment_count {
+    height: 30px;
+    font-size: 16px;
+    width: 120px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    gap: 10px;
+}
+
+.thread_share_container {
+	height: 30px;
+    font-size: 16px;
+    width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    gap: 10px;
+	
+}
+
+.thread_share_container:hover {
+	background-color: var(--background-color);
+
+}
+
+.post_date {
+    margin-left: auto;
+    margin-right: 25px;
+}
+
+.post_date > span {
+    font-size: 14px;
+}
+
+.smaller_gray_font {
+	font-size: 14px;
+	color: var(--gray);
+}
+
+.thread_vote:hover {
+	background-color: var(--background-color);
+
+}
+
+
 

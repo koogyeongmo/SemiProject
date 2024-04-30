@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import board.model.dto.BoardCommentDto;
+import board.model.dto.BoardDto;
 import image.model.dto.ImageDto;
 import image.model.dto.ImageInsertDto;
 
@@ -23,6 +24,15 @@ public class ImageService {
 		return result;
 	}
 	
+	public List<ImageDto> retrieveAllImages(Integer boardId) {
+		SqlSession session = getSqlSession();		
+		List<ImageDto> result = dao.retrieveAllImages(session, boardId);
+		session.close();
+		
+		return result;
+	}
+	
+	
 	public ImageDto retrieveImage(Integer boardId) {
 		SqlSession session = getSqlSession();
 		ImageDto result = dao.retrieveImage(session, boardId);
@@ -38,5 +48,14 @@ public class ImageService {
 		
 		return result;
 	}
+	
+	public int checkImage(int boardId) {
+		int result = 0;
+		SqlSession session = getSqlSession();
+		result = dao.checkImage(session, boardId);
+		session.close();
+		return result;
+	}
+	
 
 }

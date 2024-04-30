@@ -6,6 +6,10 @@
         INSERT INTO IMAGE (IMAGE_ID, IMAGE_BLOB, BOARD_ID, IMAGE_TYPE) VALUES (SEQ_IMAGE_ID.NEXTVAL, #{imageBlob}, #{boardId}, #{imageType})
     </insert>
     
+    <select id="retrieveAllImages" resultType="ImageDto" parameterType="Integer">
+		SELECT IMAGE_ID, IMAGE_BLOB, BOARD_ID, IMAGE_TYPE FROM IMAGE WHERE BOARD_ID=#{boardId}
+	</select>
+    
 	<select id="retrieveImage" parameterType="int" resultType="ImageDto">
 		SELECT IMAGE_ID, IMAGE_BLOB, BOARD_ID, IMAGE_TYPE FROM IMAGE WHERE BOARD_ID=#{boardId}
     </select>
@@ -13,5 +17,10 @@
 	<select id="selectImageList" resultType="ImageDto" parameterType="Integer">
 		SELECT IMAGE_ID, IMAGE_BLOB, BOARD_ID, IMAGE_TYPE FROM IMAGE WHERE BOARD_ID=#{boardId}
 	</select>
+	
+	<select id="checkImage" parameterType="Integer" resultType="Integer">
+		SELECT COUNT(*) c FROM IMAGE WHERE BOARD_ID=#{boardId}
+	</select>
+	
 	
 </mapper>

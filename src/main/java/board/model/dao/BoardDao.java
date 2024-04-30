@@ -67,5 +67,11 @@ public class BoardDao {
 		return session.selectList("boardMapper.selectCommentList", boardId);
 	}
 
+	public int upvote(SqlSession session, Integer boardId) {
+		return session.update("boardMapper.upvote", boardId);
+	}
 	
+	public int downvote(SqlSession session, Integer boardId) {
+		return session.update("boardMapper.downvote", boardId);
+	}
 }

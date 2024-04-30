@@ -3,7 +3,7 @@
 <mapper namespace="boardMapper">
 	
 	<select id="selectBoardList" resultType="BoardDto" parameterType="map">
-		select BOARD_ID, TOPIC_ID, USER_ID, UPVOTE, DOWNVOTE, TITLE, CONTENT, to_char(POST_TIME,'yyyy-mm-dd hh24:mi'),VIEWS, COMMENTS 
+		select BOARD_ID, TOPIC_ID, USER_ID, UPVOTE, DOWNVOTE, TITLE, CONTENT, POST_TIME ,VIEWS, COMMENTS 
 			from (select t1.*, rownum rn  
 				from (SELECT BOARD_ID, TOPIC_ID, USER_ID, UPVOTE, DOWNVOTE, TITLE, CONTENT, POST_TIME,VIEWS, COMMENTS FROM BOARD order by board_id desc) t1 )
 		where rn between #{startRownum} and #{endRownum}
@@ -43,6 +43,13 @@
 		update board set comments=comments+1 where board_id=#{boardId}
 	</update>
 	
+	<update id="upvote"  parameterType="Integer">
+		update board set upvote=upvote+1 where board_id=#{boardId}
+	</update>
+	
+	<update id="downvote"  parameterType="Integer">
+		update board set downvote=downvote+1 where board_id=#{boardId}
+	</update>
 	
 
 	<select id="selectCommentList" resultType="BoardCommentDto" parameterType="int">

@@ -96,4 +96,20 @@ public class BoardService {
 		return result;
 	}
 	
+	public int upvote(int boardId) {
+		int result = 0;
+		SqlSession session = getSqlSession();
+		result = dao.upvote(session, boardId);
+		session.close();
+		return result;
+	}
+	
+	public int downvote(int boardId) {
+		int result = 0;
+		SqlSession session = getSqlSession();
+		result = dao.downvote(session, boardId);
+		session.close();
+		return result;
+	}
+	
 }

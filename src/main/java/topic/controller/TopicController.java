@@ -36,7 +36,6 @@ public class TopicController extends HttpServlet {
             String[] parts = pathInfo.split("/");
             String topicId = parts[1]; 
             
-            //add checker if topic is in database
             int checkTopicExists = topicService.checkTopic(topicId);
          
             
@@ -65,6 +64,7 @@ public class TopicController extends HttpServlet {
         		request.setAttribute("topic_follower" , topic_follower);
         		request.setAttribute("banner_image" , banner_image);
         		request.setAttribute("profile_image" , profile_image);
+        		request.setAttribute("current_page", currentPageNum);
                 
         		
         		request.setAttribute("map" , boardService.selectBoardList(pageSize, currentPageNum));

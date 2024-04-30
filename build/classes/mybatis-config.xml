@@ -14,6 +14,8 @@
 		<package name="member.model.dto"/>
 		<package name="image.model.dto"/>
 		<package name="topic.model.dto"/>
+		<package name="vote.model.dto"/>
+		
 		
 		
 	</typeAliases>
@@ -35,6 +37,8 @@
 		<mapper resource="mappers/member-mapper.xml"/>
 		<mapper resource="mappers/image-mapper.xml"/>
 		<mapper resource="mappers/topic-mapper.xml"/>
+		<mapper resource="mappers/vote-mapper.xml"/>
+		
 		
 		
 	</mappers>

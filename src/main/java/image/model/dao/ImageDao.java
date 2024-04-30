@@ -1,5 +1,7 @@
 package image.model.dao;
 
+import static common.MybatisTemplate.getSqlSession;
+
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -16,6 +18,11 @@ public class ImageDao {
 		return session.insert("imageMapper.uploadImage", dto);
 	}
 	
+	public List<ImageDto> retrieveAllImages(SqlSession session, int boardId) {
+		return session.selectList("imageMapper.retrieveAllImages", boardId);
+	}
+
+	
 	public ImageDto retrieveImage(SqlSession session, int boardId) {
 		return session.selectOne("imageMapper.retrieveImage", boardId);
 	}
@@ -24,4 +31,9 @@ public class ImageDao {
 		return session.selectList("imageMapper.selectImageList", boardId);
 	}
 	
+	public int checkImage(SqlSession session, int boardId) {
+		return session.selectOne("imageMapper.checkimage", boardId);
+	}
+	
+
 }
