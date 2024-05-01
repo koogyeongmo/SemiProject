@@ -485,12 +485,8 @@
 			, success : function(result){
 				console.log(result);
 				if(result == 1 ){
-					alert("Welcome!");
-					var prePage = "${prePage}";
-					if(prePage == "write"){
-						location.href="${pageContext.request.contextPath}/board/write";
-					}
-					location.href="${pageContext.request.contextPath}/topic/cats";
+					
+					location.href="${pageContext.request.contextPath}/main";
 				}else {
 					alert("Username or password is incorrect.");
 					$("[name=pwd]").val("");
@@ -575,14 +571,7 @@
 	  			, success : function(result){
 	  				console.log(result);
 	  				if(result == 1 ){
-	  					alert("Thanks for joining!");
-	  					var prePage = "${prePage}";
-	  					console.log(prePage);
-
-	  					if(prePage == "write"){
-	  						location.href="${pageContext.request.contextPath}/board/write";
-	  					}
-	  					location.href="${pageContext.request.contextPath}/login";
+	  					location.href="${pageContext.request.contextPath}/signup/follow";
 	  				}else {
 	  					alert("fail");
 	  					$("[name=pwd]").val("");
@@ -663,7 +652,6 @@
 
         var valid = 0;
         
-        checkId();
 
 
         if (username.value.length > 0) {
@@ -672,6 +660,8 @@
             if (validateUsernameLength(username.value)) {
             	usernameCharReqChecker.style.fill =  "green";
                 valid++;
+                checkId();
+
             } else {
             	usernameCharReqChecker.style.fill =  "lightgray";
 
@@ -711,7 +701,6 @@
 
         var valid = 0;
         
-        checkEmail();
 
 
         if (email.value.length > 0) {
@@ -720,6 +709,8 @@
             if (validateEmail(email.value)) {
             	emailValidReqChecker.style.fill =  "green";
                 valid++;
+                checkEmail();
+
             } else {
             	emailValidReqChecker.style.fill =  "lightgray";
 

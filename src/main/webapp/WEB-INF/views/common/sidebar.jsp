@@ -29,15 +29,24 @@
         </div>
 
         <div class="horizontal_line"> Following topics </div>
+        
+        <c:forEach items="${followingTopics}" var="topic">
+		    <div>
+		        <a href="${pageContext.request.contextPath}/topic/${topic.topicId}">
+		            <img src="${topic.topicProfileImage}" class="mini_topic_icon">
+		            &nbsp; ${topic.getCapitalizedId()}
+		        </a>
+		    </div>
+		</c:forEach>
 
-        <div>
+<%--         <div>
             <a href="" class="sidebar_selected">
                 <img src="<%=request.getContextPath()%>/resources/images/cat_icon.jpg"  class="mini_topic_icon">
           &nbsp; cats
       </a>
       
 
-  </div>
+  </div> --%>
 
   <div class="horizontal_line_bottom"> </div>
 

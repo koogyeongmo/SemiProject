@@ -17,17 +17,26 @@ import board.model.dto.BoardCommentDto;
 public class BoardService {
 	private BoardDao dao = new BoardDao(); 	
 	
-	public List<BoardDto> selectBoardList(int pageSize, int currentPageNum) {
-		int start = pageSize*(currentPageNum-1)+1;
-		int end = pageSize*currentPageNum;
-		
+	public List<BoardDto> selectBoardListNew(String topicId) {
+
 		SqlSession session = getSqlSession();		
 		
-		List<BoardDto> result = dao.selectBoardList(session, start, end);
+		List<BoardDto> result = dao.selectBoardListNew(session, topicId);
 		session.close();
 		
 		return result;
 	}
+	
+	public List<BoardDto> selectBoardListTop(String topicId) {
+
+		SqlSession session = getSqlSession();		
+		
+		List<BoardDto> result = dao.selectBoardListTop(session, topicId);
+		session.close();
+		
+		return result;
+	}
+
 	
 	
 	public BoardDto selectOne(Integer boardId) {

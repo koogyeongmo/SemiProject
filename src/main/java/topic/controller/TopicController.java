@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.model.dto.BoardDto;
 import board.model.service.BoardService;
-
+import member.model.dto.MemberInfoDto;
 import topic.model.dto.TopicDto;
+import topic.model.dto.TopicFollowDto;
 import topic.model.service.TopicService;
+import vote.model.dto.VoteTransferDto;
 
 
 @WebServlet("/topic/*")
@@ -56,8 +58,8 @@ public class TopicController extends HttpServlet {
                 String topic_id = topicInfo.getTopicId();
                 String topic_description = topicInfo.getTopicDescription();
                 String topic_follower = NumberFormat.getInstance().format(topicInfo.getFollowerCount());
-                byte[] banner_image = topicInfo.getTopicBannerImage();
-                byte[] profile_image = topicInfo.getTopicProfileImage();
+                String banner_image = topicInfo.getTopicBannerImage();
+                String profile_image = topicInfo.getTopicProfileImage();
                 
         		request.setAttribute("topic_id" , topic_id);
         		request.setAttribute("topic_description" , topic_description);
@@ -67,7 +69,24 @@ public class TopicController extends HttpServlet {
         		request.setAttribute("current_page", currentPageNum);
                 
         		
-        		request.setAttribute("map" , boardService.selectBoardList(pageSize, currentPageNum));
+        		request.setAttribute("board_new" , boardService.selectBoardListNew(topic_id));
+        		request.setAttribute("board_top" , boardService.selectBoardListTop(topic_id));
+        		
+			  if (request.getSession().getAttribute("LoggedIn") != null) {
+				  MemberInfoDto userInfo = (MemberInfoDto) request.getSession().getAttribute("LoggedIn");
+				  String username = userInfo.getMemId();
+				  
+				  TopicFollowDto topicDto = new TopicFollowDto(topic_id, username);
+				  int followStatus = topicService.checkTopicFollow(topicDto);
+				  if (followStatus != 0) {
+					  request.setAttribute("followStatus", "following");
+				  }
+
+
+
+
+			  }		
+
                 
         		request.getRequestDispatcher("/WEB-INF/views/topic.jsp").forward(request, response);
                 return;

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import member.model.dto.MemberDto;
+import member.model.dto.MemberInfoDto;
 import member.model.service.MemberService;
 
 /**
@@ -32,13 +33,13 @@ public class JoinController extends HttpServlet {
 		String memId = request.getParameter("username");
 		String memPwd = request.getParameter("pwd");
 		String memEmail = request.getParameter("email");
-		MemberDto dto = new MemberDto(memId, memPwd, memEmail);
-		System.out.println(dto);
-		int result = new MemberService().insert(dto);
-		if(result < 0 ) {
+		MemberDto dto1 = new MemberDto(memId, memPwd, memEmail);
+		MemberInfoDto dto2 = new MemberInfoDto(memId, memPwd);
+		int result = new MemberService().insert(dto1);
+		if (result > 0) {
+			request.getSession().setAttribute("LoggedIn", dto2);
+			request.getSession().setAttribute("userId", dto2.getMemId());
 
-			response.sendRedirect(request.getContextPath()+"/main");
-			return;
 		}
 		
 		response.getWriter().append(String.valueOf(result));

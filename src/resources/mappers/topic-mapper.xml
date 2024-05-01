@@ -8,6 +8,47 @@
 	
 	<select id="selectTopic" parameterType="string" resultType="TopicDto">
 	SELECT * FROM TOPIC WHERE TOPIC_ID=#{topicId}
-</select>
+	</select>
+	
+	<insert id="joinTopic" parameterType="TopicFollowDto">
+	    INSERT INTO FOLLOWING (USER_ID, TOPIC_ID)
+	    SELECT #{userId}, #{topicId}
+	    FROM DUAL
+	    WHERE NOT EXISTS (
+	        SELECT 1
+	        FROM FOLLOWING
+	        WHERE USER_ID = #{userId} AND TOPIC_ID = #{topicId}
+	    )
+	</insert>
+	
+	<delete id="deleteTopicFollow"  parameterType="TopicFollowDto">
+		DELETE FROM FOLLOWING WHERE TOPIC_ID=#{topicId} AND USER_ID=#{userId}
+	</delete>
+	
+	<select id="checkTopicFollow" parameterType="TopicFollowDto" resultType="int">
+		SELECT COUNT(*) c  FROM FOLLOWING WHERE USER_ID=#{userId} and TOPIC_ID=#{topicId}
+	</select>
+	
+    <insert id="insertMultipleTopicFollow" parameterType="java.util.List">
+        INSERT INTO FOLLOWING (USER_ID, TOPIC_ID)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.userId}, #{item.topicId})
+        </foreach>
+    </insert>
+    
+     <select id="selectAllTopics" resultType="TopicDto">
+        SELECT TOPIC_ID, TOPIC_DESCRIPTION, FOLLOWER_COUNT, TOPIC_PROFILE_IMAGE, TOPIC_BANNER_IMAGE
+        FROM TOPIC
+    </select>
+
+ 
+    <select id="selectAllTopicsByUserId" resultType="TopicDto" parameterType="String">
+	    SELECT t.TOPIC_ID, t.TOPIC_DESCRIPTION, t.FOLLOWER_COUNT, t.TOPIC_PROFILE_IMAGE, t.TOPIC_BANNER_IMAGE
+	    FROM TOPIC t
+	    INNER JOIN FOLLOWING f ON t.TOPIC_ID = f.TOPIC_ID
+	    WHERE f.USER_ID = #{userId}
+	</select>
+
 
 </mapper>

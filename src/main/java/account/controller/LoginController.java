@@ -1,6 +1,8 @@
 package account.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,11 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import member.model.dto.MemberInfoDto;
 import member.model.dto.MemberLoginDto;
 import member.model.service.MemberService;
+import topic.model.dto.TopicDto;
+import topic.model.service.TopicService;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService service = new MemberService();
+	private TopicService topicService = new TopicService();
        
 
     public LoginController() {
@@ -36,7 +41,13 @@ public class LoginController extends HttpServlet {
 		MemberInfoDto resultInfo = service.loginGetInfo(dto);
 		
 		if(resultInfo != null) {
+			
+			List<TopicDto> followingTopics = topicService.selectAllTopicsByUserId(resultInfo.getMemId());
+			
+
+			request.getSession().setAttribute("followingTopics", followingTopics);
 			request.getSession().setAttribute("LoggedIn", resultInfo);
+			request.getSession().setAttribute("userId", resultInfo.getMemId());
 			result = 1;
 		}
 		response.getWriter().append(String.valueOf(result));

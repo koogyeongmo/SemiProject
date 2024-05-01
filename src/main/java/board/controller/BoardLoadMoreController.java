@@ -28,7 +28,7 @@ public class BoardLoadMoreController extends HttpServlet {
         int pageSize = 5;
         
 		request.setAttribute("current_page", currentPageNum);
-		request.setAttribute("map" , boardService.selectBoardList(pageSize, currentPageNum));
+		request.setAttribute("map" , boardService.selectBoardListNew(pageSize, currentPageNum));
         
 		request.getRequestDispatcher("/WEB-INF/views/topic.jsp").forward(request, response);
 	}

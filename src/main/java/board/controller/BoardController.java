@@ -20,7 +20,7 @@ import image.model.dto.ImageDto;
 import image.model.service.ImageService;
 import member.model.dto.MemberInfoDto;
 import vote.model.service.VoteService;
-import topic.model.dto.TopicDto;
+import topic.model.dto.*;
 import vote.model.dto.*;
 
 /**
@@ -57,8 +57,8 @@ public class BoardController extends HttpServlet {
 				  String topic_id = topicInfo.getTopicId();
 				  String topic_description = topicInfo.getTopicDescription();
 				  String topic_follower = NumberFormat.getInstance().format(topicInfo.getFollowerCount()); 
-				  byte[] banner_image = topicInfo.getTopicBannerImage(); 
-				  byte[] profile_image = topicInfo.getTopicProfileImage();
+				  String banner_image = topicInfo.getTopicBannerImage(); 
+				  String profile_image = topicInfo.getTopicProfileImage();
 				  
 				  
 				  request.setAttribute("topic_id" , topic_id);
@@ -77,10 +77,20 @@ public class BoardController extends HttpServlet {
 				  if (request.getSession().getAttribute("LoggedIn") != null) {
 					  MemberInfoDto userInfo = (MemberInfoDto) request.getSession().getAttribute("LoggedIn");
 					  String username = userInfo.getMemId();
-					  
+
 					  VoteTransferDto voteDto = new VoteTransferDto(username, threadId);
 					  String userVoted = voteService.check(voteDto);
 					  request.setAttribute("userVoted", userVoted);
+
+					  
+					  TopicFollowDto topicDto = new TopicFollowDto(topic_id, username);
+					  int followStatus = topicService.checkTopicFollow(topicDto);
+					  if (followStatus != 0) {
+						  request.setAttribute("followStatus", "following");
+					  }
+
+
+
 
 				  }				
 				

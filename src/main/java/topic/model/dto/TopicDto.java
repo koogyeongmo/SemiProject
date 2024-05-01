@@ -1,18 +1,20 @@
 package topic.model.dto;
 
-import java.util.Arrays;
 
 public class TopicDto {
 	private String topicId;
 	private String topicDescription;
 	private int followerCount;
-	private byte[] topicProfileImage;
-	private byte[] topicBannerImage;
+	private String topicProfileImage;
+	private String topicBannerImage;
 	
+
+
 	@Override
 	public String toString() {
-		return "TopicDto [topicId=" + topicId + ", description=" + topicDescription + ", followerCount=" + followerCount
-				+ ", topicProfileImage=" + Arrays.toString(topicProfileImage) + "]";
+		return "TopicDto [topicId=" + topicId + ", topicDescription=" + topicDescription + ", followerCount="
+				+ followerCount + ", topicProfileImage=" + topicProfileImage + ", topicBannerImage=" + topicBannerImage
+				+ "]";
 	}
 
 	public String getTopicId() {
@@ -39,20 +41,25 @@ public class TopicDto {
 		this.followerCount = followerCount;
 	}
 
-	public byte[] getTopicProfileImage() {
+	public String getTopicProfileImage() {
 		return topicProfileImage;
 	}
 
-	public void setTopicProfileImage(byte[] topicProfileImage) {
+	public void setTopicProfileImage(String topicProfileImage) {
 		this.topicProfileImage = topicProfileImage;
 	}
 
-	public byte[] getTopicBannerImage() {
+	public String getTopicBannerImage() {
 		return topicBannerImage;
 	}
 
-	public void setTopicBannerImage(byte[] topicBannerImage) {
+	public void setTopicBannerImage(String topicBannerImage) {
 		this.topicBannerImage = topicBannerImage;
+	}
+	
+	public String getCapitalizedId() {
+	    return topicId.substring(0, 1).toUpperCase() + topicId.substring(1);
+		
 	}
 	
 	

@@ -19,7 +19,16 @@
          <div class="topic_info_follow">
             <div class="following_count"><b class="format_number">${topic_follower}</b> Followers</div>
 
-            <button class="join_button"> Join </button>
+
+ 		<c:choose>
+			<c:when test="${empty followStatus}">
+            <button id="join_button" class="join_topic">Join</button>
+			</c:when>
+			<c:otherwise>
+            	<button id="join_button" class="leave_topic">Joined</button>
+	
+			</c:otherwise>
+		</c:choose>
 
 
         </div> 
@@ -48,10 +57,63 @@
             <li><span> Check before asking a question. </span></li>
             <li><span> No reposts. </span></li>
         </ol>
-
     </div>
     
-    <script src="<%=request.getContextPath()%>/resources/javascript/topic/topic_info.js">     
+    <script> 
+ 
+		 const flairs = document.querySelectorAll('.flair');
+		 const colors = ['#CC5289', '#B3A3B3', '#C04BF7', '#3083FF', '#47B2B2', '#EBC633'];
+		
+		 flairs.forEach((flair, index) => {
+		     const colorIndex = index % colors.length;
+		     flair.style.backgroundColor = colors[colorIndex];
+		 });
+
+		 
+	    function joinTopicFunc(topicId, joinType) {
+    	    var xhr = new XMLHttpRequest();
+    	    xhr.open('POST', '${pageContext.request.contextPath}/jointopic', true);
+    	    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    	    xhr.onreadystatechange = function() {
+    	        if (xhr.readyState === XMLHttpRequest.DONE) {
+    	            if (xhr.status === 200) {
+    	                var responseText = xhr.responseText;
+    	                console.log(responseText);
+    	            } else {
+    	            	console.log('Error joining topic.');
+    	            }
+    	        }
+    	    };
+    	    xhr.send('topicId=' + topicId + '&joinType=' + joinType);
+    	};
+
+
+   
+    
+    	$(document).ready(function() {
+    		
+    	
+        $("#join_button").click(function() {
+        
+	            $(this).toggleClass("join_topic leave_topic");
+	            $(this).text(function(i, text) {
+	                if (text === "Joined") {
+	                    $(this).text("Join");
+	                } else {
+	                    $(this).text("Joined");
+	                }
+	            });
+	            
+	            if ($(this).text() == "Joined") {
+	            	joinTopicFunc("${topic_id}", "join")
+	                console.log("User has joined.");
+	            } else {
+	            	joinTopicFunc("${topic_id}", "leave")
+	                console.log("User has left.");
+	            }
+	        });
+    	});
+    
 	</script>
 
 </div>

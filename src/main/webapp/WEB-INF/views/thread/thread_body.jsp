@@ -438,10 +438,8 @@
     	            if (xhr.status === 200) {
     	                var responseText = xhr.responseText;
     	                console.log(responseText);
-    	                // Re-enable the upvote and downvote buttons for this comment
     	                enableVoteButtons(boardId);
     	            } else {
-    	                // Handle error
     	            }
     	        }
     	    };

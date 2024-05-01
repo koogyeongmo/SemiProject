@@ -89,7 +89,7 @@ body {
     color: black;
 }
 
-.join_button {
+.join_topic {
     height: 40px;
     width: 80px;
     border-radius: 20px;
@@ -104,8 +104,29 @@ body {
 
 }
 
-.join_button:hover {
+.join_topic:hover {
     background-color: var(--hover-blue);
+}
+
+
+
+.leave_topic {
+    height: 40px;
+    width: 80px;
+    border-radius: 20px;
+    background-color: white;
+    border: 2px solid var(--blue);
+    color: var(--blue);
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    transition: 0.1s;
+    font-size: 18px;
+    bottom: 0;
+
+
+}
+
+.leave_topic:hover {
+    background-color: var(--background-color);
 }
 
 #three_dots_icon {

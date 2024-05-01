@@ -16,13 +16,14 @@ import board.model.dto.BoardCommentDto;
 
 public class BoardDao {
 	
-	public List<BoardDto> selectBoardList(SqlSession session, int start, int end) {
-		Map<String, Integer> param = new HashMap<String, Integer>();
-		param.put("startRownum", start);
-		param.put("endRownum", end);
-		return session.selectList("boardMapper.selectBoardList", param);
+	public List<BoardDto> selectBoardListNew(SqlSession session, String topicId) {
+		return session.selectList("boardMapper.selectBoardListNew", topicId);
 	}
 	
+	public List<BoardDto> selectBoardListTop(SqlSession session, String topicId) {
+		return session.selectList("boardMapper.selectBoardListTop", topicId);
+	}
+		
 	public BoardDto selectOne(SqlSession session, Integer boardId) {
 		return session.selectOne("boardMapper.selectOne", boardId);
 	}
