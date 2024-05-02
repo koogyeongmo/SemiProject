@@ -1,6 +1,8 @@
 package vote.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,14 +36,23 @@ public class VoteController extends HttpServlet {
 		    String voteType = request.getParameter("voteType");
 		    String username = userInfo.getMemId();
 		    
+		    
 		    VoteDto voteDto = new VoteDto(username,boardId, voteType);
 		    
 		    if ("upvote".equals(voteType)) {
 		        boardService.upvote(boardId);
 		        voteService.insert(voteDto);
+		        
+		        List<Integer> upvotedBoards = voteService.allVotesByUser(username, "upvote");
+				request.getSession().setAttribute("upvotedBoards", upvotedBoards);
+
 		    } else if ("downvote".equals(voteType)) {
 		        boardService.downvote(boardId);
 		        voteService.insert(voteDto);
+		        
+				List<Integer> downvotedBoards = voteService.allVotesByUser(username, "downvote");
+				request.getSession().setAttribute("downvotedBoards", downvotedBoards);
+
 
 		    } else if ("remove".equals(voteType)) {
 		        boardService.downvote(boardId);
@@ -51,7 +62,8 @@ public class VoteController extends HttpServlet {
 		    	System.out.println("Error upvoting/downvoting.");
 		    }
 	    	
-	    }
+	    }		
+
 
 
 	}

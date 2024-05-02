@@ -14,12 +14,16 @@ import member.model.dto.MemberLoginDto;
 import member.model.service.MemberService;
 import topic.model.dto.TopicDto;
 import topic.model.service.TopicService;
+import vote.model.dto.VoteDto;
+import vote.model.service.VoteService;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService service = new MemberService();
 	private TopicService topicService = new TopicService();
+	private VoteService voteService = new VoteService();
+
        
 
     public LoginController() {
@@ -42,9 +46,18 @@ public class LoginController extends HttpServlet {
 		
 		if(resultInfo != null) {
 			
+			List<Integer> upvotedBoards = voteService.allVotesByUser(resultInfo.getMemId(), "upvote");
+			List<Integer> downvotedBoards = voteService.allVotesByUser(resultInfo.getMemId(), "downvote");
+			
+			request.getSession().setAttribute("upvotedBoards", upvotedBoards);
+			request.getSession().setAttribute("downvotedBoards", downvotedBoards);
+
+			
 			List<TopicDto> followingTopics = topicService.selectAllTopicsByUserId(resultInfo.getMemId());
 			
 			List<TopicDto> allTopics = topicService.selectAllTopics();
+			
+
 			
 			request.getSession().setAttribute("topicList", allTopics);
 			

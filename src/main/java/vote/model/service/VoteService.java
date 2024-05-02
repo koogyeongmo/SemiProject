@@ -2,10 +2,13 @@ package vote.model.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+
 import static common.MybatisTemplate.*;
+
 import vote.model.dao.VoteDao;
 import vote.model.dto.*;
 
@@ -35,6 +38,14 @@ public class VoteService {
 		String result = null;
 		SqlSession session = getSqlSession();
 		result = dao.check(session, dto);
+		session.close();
+		return result;
+	}
+	
+	public List<Integer> allVotesByUser(String userId, String voteType) {
+		List<Integer> result = null;
+		SqlSession session = getSqlSession();
+		result = dao.allVotesByUser(session, userId, voteType);
 		session.close();
 		return result;
 	}

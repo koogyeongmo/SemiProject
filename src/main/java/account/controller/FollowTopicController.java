@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import topic.model.service.TopicService;
+import vote.model.service.VoteService;
+
 import topic.model.dto.TopicDto;
 import topic.model.dto.TopicFollowDto;
 
@@ -21,6 +23,7 @@ import topic.model.dto.TopicFollowDto;
 public class FollowTopicController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private TopicService topicService = new TopicService();
+	private VoteService voteService = new VoteService();
 
        
     /**
@@ -57,6 +60,12 @@ public class FollowTopicController extends HttpServlet {
 		    	TopicFollowDto dto = new TopicFollowDto(topic, userId);
 		    	int result = topicService.joinTopic(dto);
 		    }
+		    
+			List<Integer> upvotedBoards = voteService.allVotesByUser(userId, "upvote");
+			List<Integer> downvotedBoards = voteService.allVotesByUser(userId, "downvote");
+			
+			request.getSession().setAttribute("upvotedBoards", upvotedBoards);
+			request.getSession().setAttribute("downvotedBoards", downvotedBoards);
 		    
 		    List<TopicDto> followingTopics = topicService.selectAllTopicsByUserId(userId);
 			

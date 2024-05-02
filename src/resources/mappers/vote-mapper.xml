@@ -21,6 +21,13 @@
 		SELECT VOTE_TYPE FROM USER_VOTE WHERE BOARD_ID=#{boardId} AND USER_ID=#{userId}
 	</select>
 	
+	<select id="allVotesByUser" parameterType="map" resultType="Integer">
+		SELECT BOARD_ID
+		FROM USER_VOTE
+		WHERE USER_ID=#{userId} AND VOTE_TYPE=#{voteType}
+	</select>
+	
+	
 	
 </mapper>
 
