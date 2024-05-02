@@ -48,7 +48,23 @@
 				            </div>
 				            <div class="thread_content"> 
 				            	${vo.content}
-				            </div>
+
+							<c:choose>
+							    <c:when test="${empty board_new_cover}">
+							    </c:when>
+							    <c:otherwise>
+							        <c:if test="${not empty board_new_cover[vo.boardId]}">
+							        	<div class="board_image_container">
+				            	
+							            	<img src="${board_new_cover[vo.boardId]}" alt="thread Image" class="board_cover_image">
+							            
+							            </div>
+							        </c:if>
+							    </c:otherwise>
+							</c:choose>
+				            
+											            
+							</div>
 				            <div class="thread_bottom_nav">
 				                <div class="thread_vote">
 				                    <div class="up vote">
@@ -211,7 +227,6 @@
 	    evt.currentTarget.className += " active";
 	}
 	
-
 </script>
 
 

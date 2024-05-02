@@ -2,7 +2,11 @@ package topic.controller;
 
 import java.io.IOException;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.model.dto.BoardDto;
 import board.model.service.BoardService;
+import image.model.dto.ImageDto;
+import image.model.service.ImageService;
 import member.model.dto.MemberInfoDto;
 import topic.model.dto.TopicDto;
 import topic.model.dto.TopicFollowDto;
@@ -24,6 +30,7 @@ public class TopicController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService boardService = new BoardService();
 	private TopicService topicService = new TopicService();
+	private ImageService imageService = new ImageService();
 
        
 
@@ -72,6 +79,29 @@ public class TopicController extends HttpServlet {
         		request.setAttribute("board_new" , boardService.selectBoardListNew(topic_id));
         		request.setAttribute("board_top" , boardService.selectBoardListTop(topic_id));
         		
+        		List<ImageDto> imageList = imageService.allImages();
+
+        		if (imageList != null) {
+        		    Map<Integer, String> boardIdToUrlMap = new HashMap<>();
+        		    for (ImageDto imageDto : imageList) {
+        		        Integer boardId = imageDto.getBoardId(); 
+        		        String imageType = imageDto.getImageType();
+        		        byte[] imageData = imageDto.getImageBlob();
+        		        String base64ImageData = Base64.getEncoder().encodeToString(imageData);
+        		        String dataUrl = "data:" + imageType + ";base64," + base64ImageData;
+
+   
+        		        if (!boardIdToUrlMap.containsKey(boardId)) {
+        		            boardIdToUrlMap.put(boardId, dataUrl);
+        		        }
+        		    }
+
+        		    request.setAttribute("board_new_cover", boardIdToUrlMap);
+        		}
+        		
+        		
+        		
+     
 			  if (request.getSession().getAttribute("LoggedIn") != null) {
 				  MemberInfoDto userInfo = (MemberInfoDto) request.getSession().getAttribute("LoggedIn");
 				  String username = userInfo.getMemId();

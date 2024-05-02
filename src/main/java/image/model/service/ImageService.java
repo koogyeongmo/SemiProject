@@ -32,6 +32,14 @@ public class ImageService {
 		return result;
 	}
 	
+	public List<ImageDto> allImages() {
+		SqlSession session = getSqlSession();		
+		List<ImageDto> result = dao.allImages(session);
+		session.close();
+		
+		return result;
+	}
+	
 	
 	public ImageDto retrieveImage(Integer boardId) {
 		SqlSession session = getSqlSession();
@@ -57,5 +65,14 @@ public class ImageService {
 		return result;
 	}
 	
+	
+	 public List<ImageDto> selectTopicCoverImageList(String topicId) { SqlSession
+		 session = getSqlSession();
+		 
+		 List<ImageDto> result = dao.selectTopicCoverImageList(session, topicId);
+		 session.close();
+	 
+	 return result; }
+	 
 
 }

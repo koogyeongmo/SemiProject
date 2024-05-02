@@ -3,32 +3,19 @@
 <mapper namespace="boardMapper">
 	
 	
-<!-- 	<select id="selectBoardListNew" resultType="BoardDto" parameterType="map">
-	    select BOARD_ID, TOPIC_ID, USER_ID, UPVOTE, DOWNVOTE, TITLE, CONTENT, POST_TIME ,VIEWS, COMMENTS 
-	    from (
-	        select t1.*, rownum rn  
-	        from (
-	            SELECT BOARD_ID, TOPIC_ID, USER_ID, UPVOTE, DOWNVOTE, TITLE, CONTENT, POST_TIME,VIEWS, COMMENTS 
-	            FROM BOARD 
-	            order by POST_TIME desc 
-	        ) t1 
-	    )
-	    where rn between #{startRownum} and #{endRownum}
+ 	<select id="selectBoardListAll" resultType="BoardDto" parameterType="map">
+        SELECT BOARD_ID, TOPIC_ID, USER_ID, UPVOTE, DOWNVOTE, TITLE, CONTENT, POST_TIME,VIEWS, COMMENTS  FROM BOARD
+        
+          <where>
+		    <foreach item="item" index="index" collection="list"
+		        open="TOPIC_ID in (" separator="," close=")">
+		          #{item}
+		    </foreach>
+  		</where>
+           ORDER BY POST_TIME DESC 
 	</select>
 	
-	<select id="selectBoardListTop" resultType="BoardDto" parameterType="map">
-	    select BOARD_ID, TOPIC_ID, USER_ID, UPVOTE, DOWNVOTE, TITLE, CONTENT, POST_TIME ,VIEWS, COMMENTS 
-	    from (
-	        select t1.*, rownum rn  
-	        from (
-	            SELECT BOARD_ID, TOPIC_ID, USER_ID, UPVOTE, DOWNVOTE, TITLE, CONTENT, POST_TIME,VIEWS, COMMENTS 
-	            FROM BOARD 
-	            order by (UPVOTE - DOWNVOTE) desc 
-	        ) t1 
-	    )
-	    where rn between #{startRownum} and #{endRownum}
-	</select> -->
-	
+
 	
 	<select id="selectOne" resultType="BoardDto" parameterType="int">
 		SELECT BOARD_ID, TOPIC_ID, USER_ID, UPVOTE, DOWNVOTE, TITLE, CONTENT, POST_TIME,VIEWS, COMMENTS 

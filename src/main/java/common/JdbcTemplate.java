@@ -15,7 +15,7 @@ public class JdbcTemplate {
 	
 	public static Connection getConnection() {
 		Connection conn = null;
-		Properties prop = new Properties();
+		Properties prop = new Properties(); 
 		//TODO
 		try {
 			String currentPath = JdbcTemplate.class.getResource("./").getPath(); 

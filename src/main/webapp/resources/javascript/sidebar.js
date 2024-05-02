@@ -18,3 +18,10 @@ document.addEventListener('click', function(event) {
         profileDropdownContent.classList.remove('profile_active');
     }
 });
+
+
+function toggleDarkMode() {
+	console.log("test");
+    //document.documentElement.classList.toggle('dark-mode');
+};
+

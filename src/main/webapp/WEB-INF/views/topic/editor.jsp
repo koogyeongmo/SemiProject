@@ -1,5 +1,5 @@
 <link href="<%=request.getContextPath()%>/resources/css/topic/editor.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/quill@2.0.0/dist/quill.snow.css" rel="stylesheet" />
+<link href="https://fastly.jsdelivr.net/npm/quill@2.0.0/dist/quill.snow.css" rel="stylesheet" />
 
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -67,7 +67,7 @@
 	    </div>
 </div>
       
-      <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0/dist/quill.js"></script>
+      <script src="https://fastly.jsdelivr.net/npm/quill@2.0.0/dist/quill.js"></script>
       
       <script>
         const quill = new Quill('#editor', {
@@ -268,7 +268,6 @@
 	    		title:  document.getElementById("title_input").value,
 	    		content: quill.root.innerHTML,
 	    		userId: "${LoggedIn.memId}"
-	    		
 	    };
 	    	    
 		$.ajax({

@@ -17,6 +17,16 @@ import board.model.dto.BoardCommentDto;
 public class BoardService {
 	private BoardDao dao = new BoardDao(); 	
 	
+	public List<BoardDto> selectBoardListAll(List<String> topicIdList) {
+
+		SqlSession session = getSqlSession();		
+		
+		List<BoardDto> result = dao.selectBoardListAll(session, topicIdList);
+		session.close();
+		
+		return result;
+	}
+	
 	public List<BoardDto> selectBoardListNew(String topicId) {
 
 		SqlSession session = getSqlSession();		

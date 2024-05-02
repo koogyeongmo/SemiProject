@@ -22,6 +22,9 @@ public class ImageDao {
 		return session.selectList("imageMapper.retrieveAllImages", boardId);
 	}
 
+	public List<ImageDto> allImages(SqlSession session) {
+		return session.selectList("imageMapper.allImages");
+	}
 	
 	public ImageDto retrieveImage(SqlSession session, int boardId) {
 		return session.selectOne("imageMapper.retrieveImage", boardId);
@@ -35,5 +38,10 @@ public class ImageDao {
 		return session.selectOne("imageMapper.checkimage", boardId);
 	}
 	
+	
+	public List<ImageDto> selectTopicCoverImageList(SqlSession session, String topicId) { 
+		return session.selectList("imageMapper.selectTopicCoverImageList", topicId); 
+	 }
+	 
 
 }

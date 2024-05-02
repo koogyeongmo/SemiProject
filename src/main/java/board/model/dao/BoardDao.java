@@ -16,6 +16,11 @@ import board.model.dto.BoardCommentDto;
 
 public class BoardDao {
 	
+	public List<BoardDto> selectBoardListAll(SqlSession session, List<String> topicIdList) {
+		return session.selectList("boardMapper.selectBoardListAll", topicIdList);
+	}
+	
+	
 	public List<BoardDto> selectBoardListNew(SqlSession session, String topicId) {
 		return session.selectList("boardMapper.selectBoardListNew", topicId);
 	}

@@ -9,6 +9,10 @@
     <select id="retrieveAllImages" resultType="ImageDto" parameterType="Integer">
 		SELECT IMAGE_ID, IMAGE_BLOB, BOARD_ID, IMAGE_TYPE FROM IMAGE WHERE BOARD_ID=#{boardId}
 	</select>
+	
+	    <select id="allImages" resultType="ImageDto">
+		SELECT IMAGE_ID, IMAGE_BLOB, BOARD_ID, IMAGE_TYPE FROM IMAGE
+	</select>
     
 	<select id="retrieveImage" parameterType="int" resultType="ImageDto">
 		SELECT IMAGE_ID, IMAGE_BLOB, BOARD_ID, IMAGE_TYPE FROM IMAGE WHERE BOARD_ID=#{boardId}
@@ -21,6 +25,27 @@
 	<select id="checkImage" parameterType="Integer" resultType="Integer">
 		SELECT COUNT(*) c FROM IMAGE WHERE BOARD_ID=#{boardId}
 	</select>
+	
+ 	<select id="selectTopicCoverImageList" resultType="ImageDto" parameterType="String">
+		SELECT IMAGE_ID, IMAGE_BLOB, BOARD_ID, IMAGE_TYPE
+		FROM (
+		    SELECT 
+		        b.TOPIC_ID,
+		        i.IMAGE_ID,
+		        i.BOARD_ID,
+		        i.IMAGE_BLOB,
+		        i.IMAGE_TYPE,
+		        ROW_NUMBER() OVER(PARTITION BY b.BOARD_ID ORDER BY i.IMAGE_ID) AS rn
+		    FROM 
+		        BOARD b
+		    JOIN 
+		        IMAGE i ON b.BOARD_ID = i.BOARD_ID
+		    WHERE 
+		        b.TOPIC_ID =#{topicId}
+		) t
+		WHERE 
+		    rn = 1;
+	</select> 
 	
 	
 </mapper>

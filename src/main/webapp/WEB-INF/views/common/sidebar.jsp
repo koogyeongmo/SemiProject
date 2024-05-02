@@ -61,18 +61,58 @@
       </span>
   </button>
   <div class="profile_dropdown_content">
-      <div> 
+      <button class="profile_dropdown_buttons">
       
-		<form action="${pageContext.request.contextPath}/logout" method="post">
-		<div><button type="submit" class="logout_button">Log Out</button></div>
-		</form>
+      </button>
       
-      </div>
+      <button class="profile_dropdown_buttons">
+   		 Dark mode &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   		 <input type="checkbox" id="toggle" class="toggle-checkbox", onclick="toggleDarkMode()">
+		<label for="toggle" class="toggle-label"></label>
+    </button>
+    
+  	<form action="${pageContext.request.contextPath}/logout" method="post">
+		<button type="submit" class="profile_dropdown_buttons">
+			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/>
+			  <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+			</svg>
+			&nbsp;Log Out
+		</button>
+	</form>
 
+	
   </div>
 
 </div>
 
-<script src="<%=request.getContextPath()%>/resources/javascript/sidebar.js"> 
+<script> 
+function toggleNotificationDropdown() {
+    var dropdown = document.querySelector('.notification_dropdown_content');
+    dropdown.classList.toggle('notification_active');
+}
+
+
+function toggleProfileDropdown() {
+    var dropdown = document.querySelector('.profile_dropdown_content');
+    dropdown.classList.toggle('profile_active');
+}
+
+document.addEventListener('click', function(event) {
+    var profileDropdownContent = document.querySelector('.profile_dropdown_content');
+    var profileButton = document.querySelector('.profile_button');
+
+    if (!profileDropdownContent.contains(event.target) && !profileButton.contains(event.target)) {
+
+        profileDropdownContent.classList.remove('profile_active');
+    }
+});
+
+
+function toggleDarkMode() {
+	console.log("test");
+    //document.documentElement.classList.toggle('dark-mode');
+};
+
 
 </script>
