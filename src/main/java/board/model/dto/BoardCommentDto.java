@@ -80,6 +80,9 @@ public class BoardCommentDto {
 	public void setDownvote(Integer downvote) {
 		this.downvote = downvote;
 	}
+	public String getDate() {
+		return postTime.split(" ")[0];
+	}
 
 	@Override
 	public String toString() {

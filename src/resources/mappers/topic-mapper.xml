@@ -37,10 +37,11 @@
         </foreach>
     </insert>
     
-     <select id="selectAllTopics" resultType="TopicDto">
-        SELECT TOPIC_ID, TOPIC_DESCRIPTION, FOLLOWER_COUNT, TOPIC_PROFILE_IMAGE, TOPIC_BANNER_IMAGE
-        FROM TOPIC
-    </select>
+	<select id="selectAllTopics" resultType="TopicDto">
+	    SELECT TOPIC_ID, TOPIC_DESCRIPTION, FOLLOWER_COUNT, TOPIC_PROFILE_IMAGE, TOPIC_BANNER_IMAGE
+	    FROM TOPIC
+	    ORDER BY FOLLOWER_COUNT DESC
+	</select>
 
  
     <select id="selectAllTopicsByUserId" resultType="TopicDto" parameterType="String">

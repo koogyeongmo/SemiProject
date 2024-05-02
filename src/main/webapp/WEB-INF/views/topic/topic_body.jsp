@@ -41,11 +41,6 @@
 				
 						<div class="post"  onclick="window.location.href='${pageContext.request.contextPath }/thread/${vo.topicId}/${vo.boardId}'" >
 				            <div class="thread_title"> ${vo.title }</div>
-				            <div class="thread_user"> 
-								<img src="<%=request.getContextPath()%>/resources/images/default_profile_picture.jpg" class="comment_profile_icon">
-				                &nbsp;
-				                ${vo.userId }
-				            </div>
 				            <div class="thread_content"> 
 				            	${vo.content}
 

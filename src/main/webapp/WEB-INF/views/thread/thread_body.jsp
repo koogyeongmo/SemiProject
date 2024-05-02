@@ -124,7 +124,7 @@
 						<div class="comment_profile_container">
 					        <img src="<%=request.getContextPath()%>/resources/images/default_profile_picture.jpg" class="comment_profile_icon">
                             <div>&nbsp;<b>${vo.userId }</b></div>
-                            <div class="smaller_gray_font"> &nbsp; &nbsp;23 hours ago </div>
+                            <div class="smaller_gray_font"> &nbsp; &nbsp;${vo.postTime } </div>
 
 						</div>
 					
@@ -151,7 +151,14 @@
 			
 			    
 			                </div>
-			  
+			                <div class="thread_vote">
+			                	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-reply" viewBox="0 0 16 16">
+								  <path d="M6.598 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.7 8.7 0 0 0-1.921-.306 7 7 0 0 0-.798.008h-.013l-.005.001h-.001L7.3 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L2.614 8.254l-.042-.028a.147.147 0 0 1 0-.252l.042-.028zM7.8 10.386q.103 0 .223.006c.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96z"/>
+								</svg>
+          						Reply 
+			                </div>
+			                
+	  
 			
 			            </div>
 					</div>
@@ -159,9 +166,7 @@
 					
 					
 				</c:forEach>
-				
-		        <button class="load_button">Load more comments</button>
-						
+										
 			</c:otherwise>
 		</c:choose>
 
@@ -224,178 +229,9 @@
     var threadUpvote = document.getElementById('upvote');
     var threadDownvote = document.getElementById('downvote');
     
- /*     threadUpvote.addEventListener('click', function() {
-        var boardId = ${threadId};
-        var voteType = "upvote"; 
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '${pageContext.request.contextPath}/vote', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    var responseText = xhr.responseText;
-                    console.log(responseText); 
-
-                } else {
-                }
-            }
-        };
-        xhr.send('boardId=' + boardId + '&voteType=' + voteType); 
-    });
-    
-    threadDownvote.addEventListener('click', function() {
-        var boardId = ${threadId};
-        var voteType = "downvote"; 
-
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '${pageContext.request.contextPath}/vote', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    var responseText = xhr.responseText;
-                    console.log(responseText); 
-
-                } else {
-                }
-            }
-        };
-        xhr.send('boardId=' + boardId + '&voteType=' + voteType); 
-    });  */
-    
-    
-    
-    
-    
-   /*  
-    
-    
-    
-    
-    
-    
-    
-     function removeVote() {
-        var boardId = ${threadId};
-        var voteType = "remove"; 
-
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '${pageContext.request.contextPath}/vote', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    var responseText = xhr.responseText;
-                    console.log(responseText); 
-                    document.getElementById('upvote').onclick = function() { handleVote('upvote'); };
-                    document.getElementById('downvote').onclick = function() { handleVote('downvote'); };
-                    document.getElementById('upvote').classList.remove('voted');
-                    document.getElementById('downvote').classList.remove('voted');
-                    upvoted = false;
-                    downvoted = false;
-                } else {
-                }
-            }
-        };
-        xhr.send('boardId=' + boardId + '&voteType=' + voteType); 
-    }
-    
-    
-    function sendVote(boardId, voteType) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '${pageContext.request.contextPath}/vote', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    var responseText = xhr.responseText;
-                    console.log(responseText); 
-                } else {
-                }
-            }
-        };
-        xhr.send('boardId=' + boardId + '&voteType=' + voteType); 
-    }
- 
-
-     
-    var upvoted = false;
-    var downvoted = false;
-
-    function handleVote(voteType) {
-        if ((voteType === 'upvote' && downvoted) || (voteType === 'downvote' && upvoted)) {
-            document.getElementById('upvote').onclick = function() { handleVote('upvote'); };
-            document.getElementById('downvote').onclick = function() { handleVote('downvote'); };
-            document.getElementById('upvote').classList.remove('voted');
-            document.getElementById('downvote').classList.remove('voted');
-            upvoted = false;
-            downvoted = false;
-            removeVote();
-            return;
-        }
-
-        if ((voteType === 'upvote' && upvoted) || (voteType === 'downvote' && downvoted)) {
-            return;
-        }
-
-        if (voteType === 'upvote') {
-            document.getElementById('downvote').onclick = null;
-            document.getElementById('downvote').classList.add('voted');
-            downvoted = true;
-            console.log("Downvote disabled");
-        } else {
-            document.getElementById('upvote').onclick = null;
-            document.getElementById('upvote').classList.add('voted');
-            upvoted = true;
-            console.log("Upvote disabled");
-        }
-        
-        sendVote(boardId, voteType);
-
-        console.log("Vote type: " + voteType);
-    }
-     */
-     
-     
-     
-     
-/*     function sendVote(boardId, voteType) {
-    	console.log(boardId)
-    	console.log(voteType)
-
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '${pageContext.request.contextPath}/vote', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    var responseText = xhr.responseText;
-                    console.log(responseText); 
-                } else {
-                }
-            }
-        };
-        xhr.send('boardId=' + boardId + '&voteType=' + voteType); 
-    }
-     
-
-
-     document.addEventListener('click', function(event) {
-    	    var target = event.target;
-    	    console.log(target);
-    	    if (target.classList.contains('upvote_button')) {
-    	        var boardId = target.getAttribute('data-comment-id');
-    	        var voteType = "upvote";
-    	        sendVote(boardId, voteType);
-    	    } else if (target.classList.contains('downvote_button')) {
-    	        var boardId = target.getAttribute('data-comment-id');
-    	        var voteType = "downvote";
-    	        sendVote(boardId, voteType);
-    	    }
-    	}); */
     	
-    	var votedComments = {}; // Object to track voted comments
+    	var votedComments = {}; 
 
     	function sendVote(boardId, voteType) {
 
@@ -408,12 +244,9 @@
     	            if (xhr.status === 200) {
     	                var responseText = xhr.responseText;
     	                console.log(responseText);
-    	                // Update the votedComments object to track that the user has voted for this comment
     	                votedComments[boardId] = voteType;
-    	                // Disable the upvote and downvote buttons for this comment
     	                disableVoteButtons(boardId);
     	            } else {
-    	                // Handle error
     	            }
     	        }
     	    };

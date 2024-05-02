@@ -10,6 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>topic</title> 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    
+    <style>
+    </style>
        
 </head>
 	<body>

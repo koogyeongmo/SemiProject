@@ -44,6 +44,10 @@ public class LoginController extends HttpServlet {
 			
 			List<TopicDto> followingTopics = topicService.selectAllTopicsByUserId(resultInfo.getMemId());
 			
+			List<TopicDto> allTopics = topicService.selectAllTopics();
+			
+			request.getSession().setAttribute("topicList", allTopics);
+			
 
 			request.getSession().setAttribute("followingTopics", followingTopics);
 			request.getSession().setAttribute("LoggedIn", resultInfo);

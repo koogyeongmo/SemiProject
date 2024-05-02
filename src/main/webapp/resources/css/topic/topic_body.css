@@ -322,4 +322,19 @@ body {
     margin-top: 10px;
 }
 
+.flair {
+height: 30px; 
+margin: 5px;
+padding-left: 10px;
+padding-right: 10px;
+border-radius: 15px;
+display: flex;
+justify-content: center;
+align-items: center;
+color: #fff;
+font-size: 14px;
+box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+
+}
+
 
